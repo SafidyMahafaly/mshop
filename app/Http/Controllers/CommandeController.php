@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCommandeRequest;
 use App\Http\Requests\UpdateCommandeRequest;
 use Illuminate\Console\Command;
+use Dompdf\Options;
+use Dompdf\Dompdf;
+use NumberToWords\NumberToWords;
 
 class CommandeController extends Controller
 {
@@ -251,6 +254,27 @@ class CommandeController extends Controller
 
     public function facturation($id)
     {
-       
+        $commande = Commande::with('client', 'user', 'details.produit')->findOrFail($id);
+        // dd($commande);
+        // foreach($commande->details as $d){
+        //     dd($d);
+        // }
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        // Définir la taille du papier A5
+        $options->set('defaultPaperSize', 'a5');
+        $numberToWords = NumberToWords::transformNumber('fr', $commande->total);
+        $commande->numberToWords = $numberToWords;
+        // dd($commande);
+
+        // Créez une instance de Dompdf avec les options
+        $dompdf = new Dompdf($options);
+
+        $pdf = app('dompdf.wrapper');
+
+        // Utilisez la méthode loadView sur l'instance de la classe PDF
+        $livraison_pdf = $pdf->loadView('commandes.facturationPdf', compact('commande',));
+
+        return $livraison_pdf->stream('commandes.facturationPdf');
     }
 }
