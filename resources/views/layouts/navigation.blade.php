@@ -313,9 +313,9 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
                     <ul class="menu-content">
-                        <li class="{{ request()->is('dashboard') ? 'active' : '' }}"><a class="d-flex align-items-center" href="/dashboard"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Données</span></a>
+                        <li class="{{ Str::startsWith(request()->path(), 'dashboard') || Str::startsWith(request()->path(), 'dashboard') ? 'active' : ''}}"><a class="d-flex align-items-center" href="/dashboard"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Données</span></a>
                         </li>
-                        <li><a class="d-flex align-items-center" href="dashboard-ecommerce.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Roles &amp; Permission</span></a>
+                        <li class="{{ Str::startsWith(request()->path(), 'utilisateur') || Str::startsWith(request()->path(), 'profile') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('utilisateur.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Roles &amp; Permission</span></a>
                         </li>
                     </ul>
                 </li>
@@ -324,13 +324,14 @@
                 @php
                     use Illuminate\Support\Str;
                 @endphp
-                <li class=" nav-item {{ Str::startsWith(request()->path(), 'produit') || Str::startsWith(request()->path(), 'editP') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('produit.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Produit</span></a>
-                <li class=" nav-item  {{ Str::startsWith(request()->path(), 'categorie') || Str::startsWith(request()->path(), 'editCategorie') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('categorie.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Categorie</span></a>
-                <li class=" nav-item {{ Str::startsWith(request()->path(), 'fournisseur') || Str::startsWith(request()->path(), 'editFournisseur') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('fournisseur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Fournisseur</span></a>
-                <li class=" nav-item {{ Str::startsWith(request()->path(), 'commande') || Str::startsWith(request()->path(), 'editCommande') || Str::startsWith(request()->path(), 'addCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande</span></a>
-                <li class=" nav-item {{ Str::startsWith(request()->path(), 'livreur') || Str::startsWith(request()->path(), 'voirCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('livreur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Livreur</span></a>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a>
-                </li>
+                {{-- @if(!Auth::user()->hasRole('admin')) --}}
+                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'produit') || Str::startsWith(request()->path(), 'editP') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('produit.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Produit</span></a>
+                    <li class=" nav-item  {{ Str::startsWith(request()->path(), 'categorie') || Str::startsWith(request()->path(), 'editCategorie') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('categorie.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Categorie</span></a>
+                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'fournisseur') || Str::startsWith(request()->path(), 'editFournisseur') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('fournisseur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Fournisseur</span></a>
+                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'commande') || Str::startsWith(request()->path(), 'editCommande') || Str::startsWith(request()->path(), 'addCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande</span></a>
+                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'livreur') || Str::startsWith(request()->path(), 'voirCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('livreur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Livreur</span></a>
+                    <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a></li>
+                {{-- @endif --}}
             </ul>
         </div>
     </div>
