@@ -385,18 +385,24 @@ if (dtUserTable.length) {
                 render: function (data, type, full) {
                     var userView = '/editCommande/' + full.id;
                     var userDelete = '/deleteCommande/' + full.id;
+                    var userFactur = '/commande/facturation/' + full.id;
+
                     return (
                         '<div class="btn-group">' +
-                        '<a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">' +
-                        feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
-                        '</a>' +
-                        '<div class="dropdown-menu dropdown-menu-end">' +
-                        '<a href="' + userView + '" class="dropdown-item">' +
-                        feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
-                        'edit</a>' +
-                        '<a href="' + userDelete + '" class="dropdown-item delete-record">' +
-                        feather.icons['trash-2'].toSvg({ class: 'font-small-4 me-50' }) +
-                        'Delete</a></div>' +
+                            '<a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">' +
+                            feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
+                            '</a>' +
+                            '<div class="dropdown-menu dropdown-menu-end">' +
+                                '<a href="' + userView + '" class="dropdown-item">' +
+                                feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
+                                'edit</a>' +
+                                '<a href="' + userDelete + '" class="dropdown-item delete-record">' +
+                                feather.icons['trash-2'].toSvg({ class: 'font-small-4 me-50' }) +
+                                'Delete</a>'+
+                                '<a href="' + userFactur + '" class="dropdown-item delete-record">' +
+                                feather.icons['trash-2'].toSvg({ class: 'font-small-4 me-50' }) +
+                                'Facturation</a>'+
+                            '</div>' +
                         '</div>'
                     );
                 }

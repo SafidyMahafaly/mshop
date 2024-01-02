@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/editCommande/{id}',[CommandeController::class,'edit']);
     Route::post('/updateCommande/{id}',[CommandeController::class,'update'])->name('commande.update');
     Route::get('/deleteCommande/{id}',[CommandeController::class,'destroy']);
+    Route::get('/commande/facturation/{id}',[CommandeController::class,'facturation']);
     //fin commande
 
 

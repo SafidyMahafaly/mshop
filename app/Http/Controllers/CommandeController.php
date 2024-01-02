@@ -248,4 +248,9 @@ class CommandeController extends Controller
         $commande->delete();
         return back();
     }
+
+    public function facturation($id)
+    {
+       
+    }
 }
