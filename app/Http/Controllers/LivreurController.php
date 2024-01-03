@@ -174,8 +174,15 @@ class LivreurController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Livreur $livreur)
+    public function destroy($id) //(Livreur $livreur)
     {
-        //
+        try {
+            $livreur = Livreur::findOrFail($id);
+            toastr('Suppression de livreur '.$livreur->name.' bien effectué.');
+            $livreur->delete();
+        } catch (\Throwable $th) {
+            toastr()->error('Ce livreur n\'existe pas!');
+        }
+        return redirect()->route('livreur.index');
     }
 }

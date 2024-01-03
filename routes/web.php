@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/changeStatusReporter',[LivreurController::class,'changeStatusReporter']);
     Route::get('/editLivreur/{id}', [LivreurController::class,'edit'])->name('livreur.edit');
     Route::post('/updateLivreur/{id}', [LivreurController::class,'update'])->name('livreur.update');
+    Route::get('/deleteLivreur/{id}', [LivreurController::class,'destroy'])->name('livreur.destroy');
     //fin livreur
 
 
