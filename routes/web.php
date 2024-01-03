@@ -88,6 +88,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/changeStatusLivre',[LivreurController::class,'changeStatus']);
     Route::get('/changeStatusAnnuler',[LivreurController::class,'changeStatusAnnuler']);
     Route::get('/changeStatusReporter',[LivreurController::class,'changeStatusReporter']);
+    Route::get('/editLivreur/{id}', [LivreurController::class,'edit'])->name('livreur.edit');
+    Route::post('/updateLivreur/{id}', [LivreurController::class,'update'])->name('livreur.update');
     //fin livreur
 
 

@@ -144,17 +144,20 @@ class LivreurController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Livreur $livreur)
+    public function edit ($id) //(Livreur $livreur)
     {
-        //
+        $livreur = Livreur::findOrFail($id);
+        return view('livreur.edit', compact('livreur'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLivreurRequest $request, Livreur $livreur)
+    public function update($id, StoreLivreurRequest $request) //(UpdateLivreurRequest $request, Livreur $livreur)
     {
-        //
+        $livreur = Livreur::findOrFail($id);
+        $livreur->update($request->all());
+        return redirect()->route('livreur.index');
     }
 
     /**
