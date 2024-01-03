@@ -130,6 +130,7 @@ class LivreurController extends Controller
     public function store(StoreLivreurRequest $request)
     {
         $livreur = Livreur::create($request->all());
+        toastr('Création de livreur '.$request->name.' bien effectué.');
         return back();
     }
 
@@ -146,7 +147,12 @@ class LivreurController extends Controller
      */
     public function edit ($id) //(Livreur $livreur)
     {
-        $livreur = Livreur::findOrFail($id);
+        try {
+            $livreur = Livreur::findOrFail($id);
+        } catch (\Throwable $th) {
+            toastr()->error('Ce livreur n\'existe pas!');
+            return back();
+        }
         return view('livreur.edit', compact('livreur'));
     }
 
@@ -155,8 +161,13 @@ class LivreurController extends Controller
      */
     public function update($id, StoreLivreurRequest $request) //(UpdateLivreurRequest $request, Livreur $livreur)
     {
-        $livreur = Livreur::findOrFail($id);
-        $livreur->update($request->all());
+        try {
+            $livreur = Livreur::findOrFail($id);
+            $livreur->update($request->all());
+            toastr('Modification de livreur '.$request->name.' bien effectué.');
+        } catch (\Throwable $th) {
+            toastr()->error('Ce livreur n\'existe pas!');
+        }
         return redirect()->route('livreur.index');
     }
 
