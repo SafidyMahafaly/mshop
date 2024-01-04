@@ -7,6 +7,7 @@ use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\LivreurController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ClientController;
 use App\Models\Fournisseur;
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +94,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/deleteLivreur/{id}', [LivreurController::class,'destroy'])->name('livreur.destroy');
     //fin livreur
 
+    /*** route client */
+    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+    Route::post('/saveclient',[ ClientController::class, 'store'])->name('client.store');
+    Route::post('/updateclient/{id}',[ ClientController::class, 'update'])->name('client.update');
+    Route::get('/getAllClient', [ClientController::class, 'getAllClient']);
+    Route::get('/client/edit/{id}', [ClientController::class, 'edit'])->name('client.edit');
+    Route::get('/destroyClient/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
+    /*** fin route client */
 
 });
 

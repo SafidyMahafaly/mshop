@@ -329,7 +329,7 @@
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'fournisseur') || Str::startsWith(request()->path(), 'editFournisseur') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('fournisseur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Fournisseur</span></a>
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'commande') || Str::startsWith(request()->path(), 'editCommande') || Str::startsWith(request()->path(), 'addCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande</span></a>
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'livreur') || Str::startsWith(request()->path(), 'voirCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('livreur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Livreur</span></a>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a>
+                <li class=" nav-item {{ Route::is(['client.*']) ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('client.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a>
                 </li>
             </ul>
         </div>
