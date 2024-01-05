@@ -285,8 +285,16 @@ if (dtUserTable.length) {
         columns: [
             { data: 'selected', orderable: false, className: 'select-checkbox ' },
             { data: 'id' },
+            {
+                data: 'lieu_livraison',
+                render: function(data, type, row) {
+                    if (type === 'display') {
+                        return data ? data : 'Recuperer';
+                    }
+                    return data;
+                }
+            },
             { data: 'client.name' },
-            { data: 'client.phone' },
             {
                 data: 'details',
                 render: function(data) {
@@ -300,16 +308,17 @@ if (dtUserTable.length) {
                         return data.map(detail => detail.quantity).join('<br>');
                     }
             },
-            {
-                data: 'details',
-                render: function(data) {
-                    return data.map(detail => `- ${detail.produit.selling_price} Ar`).join('<br>');
-                }
-            },
+            // {
+            //     data: 'details',
+            //     render: function(data) {
+            //         return data.map(detail => `- ${detail.produit.selling_price} Ar`).join('<br>');
+            //     }
+            // },
             { data: 'total',
-                render: function(data, type, row) {
+            render: function(data, type, row) {
                     if (type === 'display') {
-                        return data + ' Ar';
+                        // Utilise toLocaleString() pour ajouter des séparateurs de milliers
+                        return parseFloat(data).toLocaleString('fr-FR') + ' Ar';
                     }
                     return data;
                 }
@@ -379,7 +388,7 @@ if (dtUserTable.length) {
                 visible: false, // Masquer la colonne ID si nécessaire
             },
             {
-                targets: [11],
+                targets: [10],
                 title: 'Actions',
                 orderable: false,
                 render: function (data, type, full) {
@@ -571,5 +580,5 @@ $('#exportButton .livraison').on('click',function(){
 
 
   // Phone Number
- 
+
 });

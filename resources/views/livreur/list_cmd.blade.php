@@ -9,7 +9,7 @@
                     <div class="col-md-2 p-2">
                         <label class="form-label" for="basic-icon-default-fullname">Filtre par date :</label>
                         <input type="hidden" id="livreur_id" value="{{$livreur->id}}" >
-                        <input type="date" class="form-control" id="filter_date" name="filter_date" value="{{ old('filter_date') }}">
+                        <input type="date" class="form-control" id="filter_date" name="filter_date" value="{{ $date ? $date->format('Y-m-d') : '' }}">
                     </div>
                     <div class="card-datatable table-responsive pt-0 p-1">
                         <table class="user-cmd-table table">

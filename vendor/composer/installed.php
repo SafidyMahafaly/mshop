@@ -382,6 +382,15 @@
                 0 => 'v10.34.2',
             ),
         ),
+        'kkszymanowski/traitor' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => 'c16d90149e807d71562953eb5c9279e75170b63f',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kkszymanowski/traitor',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -418,7 +427,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '28500ced16620fd607be693cff325e4d2c7f62ff',
+            'reference' => '4d3567d9a523779e63cc937e6fe5c7ec91ab8988',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -887,6 +896,15 @@
             'reference' => 'e41d2140031d533348b2192a83f02d8dd8a71d30',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sabberworm/php-css-parser',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'santigarcor/laratrust' => array(
+            'pretty_version' => '8.2.1',
+            'version' => '8.2.1.0',
+            'reference' => '58d75e531de46f162d61f91f17e771a9ecb1132e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../santigarcor/laratrust',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

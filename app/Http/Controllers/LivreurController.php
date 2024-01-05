@@ -44,10 +44,13 @@ class LivreurController extends Controller
                 // Sinon, filtrer par la date d'aujourd'hui
                 $query->whereDate('created_at', Carbon::today());
             }
-
             $commandes = $query->get();
-
-            return view('livreur.list_cmd', compact('commandes', 'livreur'));
+            if($date){
+                $date = is_string($date) ? \Carbon\Carbon::parse($date) : $date;
+            }else{
+                $date = Carbon::today();;
+            }
+            return view('livreur.list_cmd', compact('commandes', 'livreur','date','id'));
         }
     }
 
@@ -92,7 +95,7 @@ class LivreurController extends Controller
     }
 
 
-    public function genererPDF(){
+    public function genererPDF($id,$date){
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
 
@@ -100,7 +103,8 @@ class LivreurController extends Controller
         $dompdf = new Dompdf($options);
 
         $commandes = Livreur_commande::with('commande.details', 'commande.client', 'commande.user','commande.details.produit','commande.details.produit.categorie')
-            ->where('livreur_id', 7)
+            ->where('livreur_id', $id)
+            ->whereDate('created_at', $date)
             ->get();
 
 

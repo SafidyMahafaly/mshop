@@ -6,11 +6,13 @@ use App\Models\Client;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardControlleur extends Controller
 {
     public function index()
     {
+
         $aujourdHui1 = Carbon::now();
         // dd($aujourdHui->toDateTimeString());
         // Date d'il y a 7 jours

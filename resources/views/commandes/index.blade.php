@@ -16,13 +16,13 @@
                                 <tr>
                                     <th></th>
                                     <th></th>
+                                    <th  style="width: 150px">Lieux</th>
                                     <th>Nom du client</th>
-                                    <th>Téléphone</th>
-                                    <th style="width: 200px">Produit</th>
-                                    <th style="width: 20px">QT</th>
-                                    <th>Prix unitaire</th>
+                                    <th style="width: 150px">Produit</th>
+                                    <th style="width: 10px">QT</th>
+                                    {{-- <th style="dis">Prix unitaire</th> --}}
                                     <th>Total</th>
-                                    <th>Statut</th>
+                                    <th style="width: 70px">Statut</th>
                                     <th>Payé</th>
                                     <th>Crée par</th>
                                     <th>Actions</th>

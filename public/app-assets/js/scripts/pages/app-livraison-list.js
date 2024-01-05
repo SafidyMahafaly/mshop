@@ -105,7 +105,8 @@ $('#livree').on('click', function () {
 });
 var dtUserTable = $('.user-cmd-table')
 if (dtUserTable.length) {
-
+    var date = $('#filter_date').val();
+    var livreur = $('#livreur_id').val();
 
     dtUserTable.DataTable({
         order: [[1, 'desc']],
@@ -159,7 +160,7 @@ if (dtUserTable.length) {
                         className: 'dropdown-item',
                         action: function (e, dt, button, config) {
                             // Redirigez l'utilisateur vers votre lien lors du clic sur le bouton PDF
-                            window.location.href = '/genererPDF'; // Remplacez 'votre_lien' par le lien souhaité
+                            window.location.href = '/genererPDF/'+ livreur + '/' + date; // Remplacez 'votre_lien' par le lien souhaité
                         }
                     },
                     {

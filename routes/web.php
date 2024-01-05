@@ -7,6 +7,7 @@ use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\LivreurController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserControlleur;
 use App\Models\Fournisseur;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,13 @@ Route::get('/', function () {
 Route::get('/dashboard',[DashboardControlleur::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
+    //route utilisateur
+    Route::get('/utilisateur',[UserControlleur::class,'index'])->name('utilisateur.index');
+    Route::get('/getUtilisateur',[UserControlleur::class,'getUtilisateur']);
+    //fin utilisateur
+
+
     //route produit
     Route::get('/produit',[ProduitController::class,'index'])->name('produit.index');
     Route::post('/produitSave',[ProduitController::class,'store'])->name('produit.store');
@@ -39,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
 
     //route  profil
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/{id?}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //fin profil
@@ -84,7 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/getLivreur',[LivreurController::class,'getLivreur']);
     Route::post('/livreurSave',[LivreurController::class,'store'])->name('livreur.store');
     Route::get('/voirCommande/{id}/{date?}',[LivreurController::class,'voir_commande']);
-    Route::get('/genererPDF',[LivreurController::class,'genererPDF']);
+    Route::get('/genererPDF/{id}/{date}',[LivreurController::class,'genererPDF']);
     Route::get('/changeStatusLivre',[LivreurController::class,'changeStatus']);
     Route::get('/changeStatusAnnuler',[LivreurController::class,'changeStatusAnnuler']);
     Route::get('/changeStatusReporter',[LivreurController::class,'changeStatusReporter']);
