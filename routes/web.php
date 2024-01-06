@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\CommandeController;
-use App\Http\Controllers\DashboardControlleur;
-use App\Http\Controllers\FournisseurController;
+use App\Models\Fournisseur;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserControlleur;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LivreurController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserControlleur;
-use App\Models\Fournisseur;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\DashboardControlleur;
+use App\Http\Controllers\FournisseurController;
+use App\Http\Controllers\MagasinerControlleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,8 +98,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/changeStatusLivre',[LivreurController::class,'changeStatus']);
     Route::get('/changeStatusAnnuler',[LivreurController::class,'changeStatusAnnuler']);
     Route::get('/changeStatusReporter',[LivreurController::class,'changeStatusReporter']);
+    Route::get('/editLivreur/{id}', [LivreurController::class,'edit'])->name('livreur.edit');
+    Route::post('/updateLivreur/{id}', [LivreurController::class,'update'])->name('livreur.update');
+    Route::get('/deleteLivreur/{id}', [LivreurController::class,'destroy'])->name('livreur.destroy');
     //fin livreur
 
+    /*** route client */
+    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+    Route::post('/saveclient',[ ClientController::class, 'store'])->name('client.store');
+    Route::post('/updateclient/{id}',[ ClientController::class, 'update'])->name('client.update');
+    Route::get('/getAllClient', [ClientController::class, 'getAllClient']);
+    Route::get('/client/edit/{id}', [ClientController::class, 'edit'])->name('client.edit');
+    Route::get('/destroyClient/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
+    /*** fin route client */
+
+
+    //Route magasinier
+    Route::get('/magasinier',[MagasinerControlleur::class,'index'])->name('magasinier.index');
+    Route::get('/detail_produit/{id}',[MagasinerControlleur::class,'detail']);
+    //fin route magasinier
 
 });
 

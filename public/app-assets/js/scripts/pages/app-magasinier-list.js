@@ -21,7 +21,7 @@ $(function () {
 
   ('use strict');
 
-  var dtUserTable = $('.user-list-table'),
+  var dtUserTable = $('.user-magasinier-table'),
     newUserSidebar = $('.new-user-modal'),
     select = $('.select2'),
 
@@ -68,11 +68,9 @@ if (dtUserTable.length) {
             { data: 'name' },
             { data: 'reference' },
             { data: 'unity' },
-
-            { data: 'purchase_price' },
-            { data: 'selling_price' },
             { data: 'categorie.name' },
-
+            { data: 'unity' },
+            // { data: 'categorie.name' },
         ],
         columnDefs: [
             {
@@ -85,8 +83,19 @@ if (dtUserTable.length) {
                 }
             },
             {
+                targets: 1, // L'indice de la colonne où vous souhaitez ajouter le lien
+                responsivePriority: 4,
+                render: function (data, type, full, meta) {
+                    var columnName = dtUserTable.DataTable().settings().init().columns[meta.col].data;
+                    var columnData = full[columnName];
+
+                    // Ajoutez le lien avec l'URL spécifique pour chaque ligne
+                    return '<a href="/detail_produit/' + full.id + '">' + columnData + '</a>';
+                }
+            },
+            {
                 targets: [1, 2, 3],
-                responsivePriority: 5,
+                responsivePriority: 4,
                 render: function (data, type, full, meta) {
                     var columnName = dtUserTable.DataTable().settings().init().columns[meta.col].data;
                     var columnData = full[columnName];
@@ -94,22 +103,7 @@ if (dtUserTable.length) {
                 }
             },
             {
-                targets: [4, 5], // Les indices des colonnes 'purchase_price' et 'selling_price'
-                render: function (data, type, full) {
-                    // Vérifiez si le type de rendu est pour l'affichage ou pour la saisie (pour le tri, etc.)
-                    if (type === 'display' || type === 'filter') {
-                        // Utilisez parseFloat pour vous assurer que la valeur est traitée comme un nombre décimal
-                        var price = parseFloat(data);
-                        // Formatez le prix avec le symbole "Ar"
-                        var formattedPrice =  price.toLocaleString('fr-FR') + " Ar" ;
-                        return '<p>' + formattedPrice + '</p>';
-                    }
-                    // Pour d'autres types, retournez simplement la valeur
-                    return data;
-                }
-            },
-            {
-                targets: 6,
+                targets: 4,
                 title: 'Categorie',
                 orderable: false,
                 render: function (data, type, full) {
@@ -123,7 +117,7 @@ if (dtUserTable.length) {
                 }
             },
             {
-                targets: 7,
+                targets: 5,
                 title: 'Actions',
                 orderable: false,
                 render: function (data, type, full) {
@@ -146,16 +140,6 @@ if (dtUserTable.length) {
                 }
             }
         ],
-        createdRow: function (row, data, dataIndex) {
-            // Récupérez la valeur de purchase_price
-            var purchasePrice = data.purchase_price;
-
-            // Vérifiez si purchase_price est null
-            if (purchasePrice === null) {
-                // Appliquez une classe CSS pour colorier la ligne en rouge
-                $(row).addClass('row-red');
-            }
-        },
         order: [[1, 'desc']],
         dom:
             '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"' +

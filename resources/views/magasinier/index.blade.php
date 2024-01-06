@@ -1,10 +1,4 @@
 <x-app-layout>
-    <style>
-        .row-red {
-            background-color: rgb(242, 235, 235); /* Couleur rouge claire */
-            /* color: white; */
-        }
-    </style>
     <div class="py-12">
         <div class="">
             <section class="app-user-list">
@@ -14,15 +8,13 @@
                         <h4 class="card-title">Liste produit & Filter</h4>
                     </div>
                     <div class="card-datatable table-responsive pt-0">
-                        <table class="user-list-table table">
+                        <table class="user-magasinier-table table">
                             <thead class="table-light">
                                 <tr>
                                     <th></th>
                                     <th>Name</th>
                                     <th>Reference</th>
                                     <th>Unite</th>
-                                    <th>Prix d'achat</th>
-                                    <th>Prix de vente</th>
                                     <th>categorie</th>
                                     <th>Actions</th>
                                 </tr>
@@ -51,14 +43,14 @@
                                         <label class="form-label" for="basic-icon-default-fullname">unité</label>
                                         <input type="number" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="" name="unity" required />
                                     </div>
-                                    <div class="mb-1">
+                                    {{-- <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-uname">Prix d'achat</label>
                                         <input type="number" id="basic-icon-default-uname" class="form-control dt-uname" placeholder="12000 Ar" name="purchase_price"  required/>
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-email">Prix de vente</label>
                                         <input type="number" id="basic-icon-default-email" class="form-control dt-email" placeholder="20000 Ar" name="selling_price" required />
-                                    </div>
+                                    </div> --}}
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-email">Déscription</label>
                                         <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="Coca cola petit" name="description"/>
@@ -67,11 +59,11 @@
                                         <label class="form-label" for="basic-icon-default-contact">Categorie</label>
                                         <select id="country" name="categorie_id" class="select2 form-select">
                                             <option value="" selected hidden>Selectioner categorie</option>
-                                            @forelse ($categorie as $categ)
+                                            {{-- @forelse ($categorie as $categ)
                                                 <option value="{{$categ->id}}">{{$categ->name}}</option>
                                             @empty
                                                 <p>pas de categorie</p>
-                                            @endforelse
+                                            @endforelse --}}
 
                                         </select>
                                     </div>
@@ -79,11 +71,11 @@
                                         <label class="form-label" for="basic-icon-default-contact">Fournisseur</label>
                                         <select id="country" name="fournisseur_id" class="select2 form-select">
                                             <option value="" selected hidden>Selectioner fournisseur</option>
-                                            @forelse ($fourniseur as $fourniseu)
+                                            {{-- @forelse ($fourniseur as $fourniseu)
                                                 <option value="{{$fourniseu->id}}">{{$fourniseu->name}}</option>
                                             @empty
                                                 <p>pas de categorie</p>
-                                            @endforelse
+                                            @endforelse --}}
                                         </select>
                                     </div>
                                     <div class="mb-1 d-none">

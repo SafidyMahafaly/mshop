@@ -53,7 +53,7 @@ $(function () {
                 render: function (data, type, full) {
                     var commandeView = '/voirCommande/' + full.id; // Utilisez directement full.id
                     var userView = '/editLivreur/' + full.id; // Utilisez directement full.id
-                    var userDelete = '/deleteF/' + full.id; // Utilisez directement full.id
+                    var userDelete = '/deleteLivreur/' + full.id; // Utilisez directement full.id
                     return (
                         '<div class="btn-group">' +
                         '<a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">' +

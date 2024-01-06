@@ -324,14 +324,14 @@
                 @php
                     use Illuminate\Support\Str;
                 @endphp
-                {{-- @if(!Auth::user()->hasRole('admin')) --}}
-                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'produit') || Str::startsWith(request()->path(), 'editP') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('produit.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Produit</span></a>
-                    <li class=" nav-item  {{ Str::startsWith(request()->path(), 'categorie') || Str::startsWith(request()->path(), 'editCategorie') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('categorie.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Categorie</span></a>
-                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'fournisseur') || Str::startsWith(request()->path(), 'editFournisseur') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('fournisseur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Fournisseur</span></a>
-                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'commande') || Str::startsWith(request()->path(), 'editCommande') || Str::startsWith(request()->path(), 'addCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande</span></a>
-                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'livreur') || Str::startsWith(request()->path(), 'voirCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('livreur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Livreur</span></a>
-                    <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a></li>
-                {{-- @endif --}}
+                <li class=" nav-item {{ Str::startsWith(request()->path(), 'produit') || Str::startsWith(request()->path(), 'editP') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('produit.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Produit</span></a>
+                <li class=" nav-item  {{ Str::startsWith(request()->path(), 'categorie') || Str::startsWith(request()->path(), 'editCategorie') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('categorie.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Categorie</span></a>
+                <li class=" nav-item {{ Str::startsWith(request()->path(), 'fournisseur') || Str::startsWith(request()->path(), 'editFournisseur') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('fournisseur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Fournisseur</span></a>
+                <li class=" nav-item {{ Str::startsWith(request()->path(), 'commande') || Str::startsWith(request()->path(), 'editCommande') || Str::startsWith(request()->path(), 'addCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande</span></a>
+                <li class=" nav-item {{ Str::startsWith(request()->path(), 'livreur') || Str::startsWith(request()->path(), 'voirCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('livreur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Livreur</span></a>
+                <li class=" nav-item {{ Route::is(['client.*']) ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('client.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a>
+                <li class=" nav-item {{ Route::is(['magasinier.*']) ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('magasinier.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Magasinier</span></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -403,6 +403,7 @@
     @stack('scripts-bottom')
 
     <script src="{{asset('app-assets/js/scripts/pages/app-user-list.js')}}"></script>
+    <script src="{{asset('app-assets/js/scripts/pages/app-magasinier-list.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/pages/app-categorie-list.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/pages/app-fournisseur-list.js')}}"></script>
 

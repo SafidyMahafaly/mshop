@@ -12,6 +12,12 @@ class DashboardControlleur extends Controller
 {
     public function index()
     {
+        // $beneficeJournalier = Commande::whereDate('created_at', today())->sum(function ($commande) {
+        //     return $commande->produits->sum('prix_vente') - $commande->produits->sum('prix_achat');
+        // });
+
+
+
 
         $aujourdHui1 = Carbon::now();
         // dd($aujourdHui->toDateTimeString());
@@ -42,7 +48,7 @@ class DashboardControlleur extends Controller
             $div = $nombreDeCommandes ;
         }
         // Calcul du pourcentage
-        $pourcentageLivre = ($commandesLivre / $div) * 100;
+        $pourcentageLivre = round(($commandesLivre / $div) * 100);
 
         return view('dashboard',compact('client','commande','nombreDeCommandes','pourcentageLivre','commandesEnAttente','commandesLivre','commandesAnnule'));
     }

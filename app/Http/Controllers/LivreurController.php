@@ -134,6 +134,7 @@ class LivreurController extends Controller
     public function store(StoreLivreurRequest $request)
     {
         $livreur = Livreur::create($request->all());
+        toastr('Création de livreur '.$request->name.' bien effectué.');
         return back();
     }
 
@@ -148,24 +149,44 @@ class LivreurController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Livreur $livreur)
+    public function edit ($id) //(Livreur $livreur)
     {
-        //
+        try {
+            $livreur = Livreur::findOrFail($id);
+        } catch (\Throwable $th) {
+            toastr()->error('Ce livreur n\'existe pas!');
+            return back();
+        }
+        return view('livreur.edit', compact('livreur'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLivreurRequest $request, Livreur $livreur)
+    public function update($id, StoreLivreurRequest $request) //(UpdateLivreurRequest $request, Livreur $livreur)
     {
-        //
+        try {
+            $livreur = Livreur::findOrFail($id);
+            $livreur->update($request->all());
+            toastr('Modification de livreur '.$request->name.' bien effectué.');
+        } catch (\Throwable $th) {
+            toastr()->error('Ce livreur n\'existe pas!');
+        }
+        return redirect()->route('livreur.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Livreur $livreur)
+    public function destroy($id) //(Livreur $livreur)
     {
-        //
+        try {
+            $livreur = Livreur::findOrFail($id);
+            toastr('Suppression de livreur '.$livreur->name.' bien effectué.');
+            $livreur->delete();
+        } catch (\Throwable $th) {
+            toastr()->error('Ce livreur n\'existe pas!');
+        }
+        return redirect()->route('livreur.index');
     }
 }

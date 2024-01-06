@@ -1,0 +1,10 @@
+/vendor
+/vendor/composer/autoload_classmap.php
+/storage/logs/
+/storage/app/public/
+/node_modules
+/public/.htaccess
+/storage/*.key
+.env
+composer.lock
+/storage/uploads/
