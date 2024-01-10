@@ -53,6 +53,68 @@ $(function () {
 
   // Users List datatable
 if (dtUserTable.length) {
+    var buttons = [
+        {
+            extend: 'collection',
+            className: 'btn btn-outline-secondary dropdown-toggle me-2',
+            text: feather.icons['external-link'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
+            buttons: [
+                {
+                    extend: 'print',
+                    text: feather.icons['printer'].toSvg({ class: 'font-small-4 me-50' }) + 'Print',
+                    className: 'dropdown-item',
+                    exportOptions: { columns: [1, 2, 3, 4] }
+                },
+                {
+                    extend: 'csv',
+                    text: feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) + 'Csv',
+                    className: 'dropdown-item',
+                    exportOptions: { columns: [1, 2, 3, 4] }
+                },
+                {
+                    extend: 'excel',
+                    text: feather.icons['file'].toSvg({ class: 'font-small-4 me-50' }) + 'Excel',
+                    className: 'dropdown-item',
+                    exportOptions: { columns: [1, 2, 3, 4, 5, 6] }
+                },
+                {
+                    extend: 'pdf',
+                    text: feather.icons['clipboard'].toSvg({ class: 'font-small-4 me-50' }) + 'Pdf',
+                    className: 'dropdown-item',
+                    exportOptions: { columns: [1, 2, 3, 4] }
+                },
+                {
+                    extend: 'copy',
+                    text: feather.icons['copy'].toSvg({ class: 'font-small-4 me-50' }) + 'Copy',
+                    className: 'dropdown-item',
+                    exportOptions: { columns: [1, 2, 3, 4] }
+                }
+            ],
+            init: function (api, node, config) {
+                $(node).removeClass('btn-secondary');
+                $(node).parent().removeClass('btn-group');
+                setTimeout(function () {
+                    $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
+                }, 50);
+            }
+        }
+    ];
+
+    // Condition pour le bouton "Add New Produit"
+    if (isSuperAdmin) {
+        buttons.push({
+            text: 'Add New Produit',
+            className: 'add-new btn btn-primary',
+            attr: {
+                'data-bs-toggle': 'modal',
+                'data-bs-target': '#modals-slide-in'
+            },
+            init: function (api, node, config) {
+                $(node).removeClass('btn-secondary');
+            }
+        });
+    }
+    // alert(isSuperAdmin)
     dtUserTable.DataTable({
         ajax: {
             url: '/getProduit', // Remplacez par l'URL de votre endpoint Laravel
@@ -68,12 +130,12 @@ if (dtUserTable.length) {
             { data: 'name' },
             { data: 'reference' },
             { data: 'unity' },
-
             { data: 'purchase_price' },
             { data: 'selling_price' },
             { data: 'categorie.name' },
+            isSuperAdmin ? { data: 'actions' } : null, // Ajoutez cette ligne si l'utilisateur est superadministrator
+        ].filter(Boolean), // Pour éliminer les valeurs nulles du tableau
 
-        ],
         columnDefs: [
             {
                 className: 'control',
@@ -127,22 +189,27 @@ if (dtUserTable.length) {
                 title: 'Actions',
                 orderable: false,
                 render: function (data, type, full) {
-                    var userView = '/editP/' + full.id; // Utilisez directement full.id
-                    var userDelete = '/deleteP/' + full.id; // Utilisez directement full.id
-                    return (
-                        '<div class="btn-group">' +
-                        '<a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">' +
-                        feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
-                        '</a>' +
-                        '<div class="dropdown-menu dropdown-menu-end">' +
-                        '<a href="' + userView + '" class="dropdown-item">' +
-                        feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
-                        'edit</a>' +
-                        '<a href="'+userDelete+'" class="dropdown-item delete-record">' +
-                        feather.icons['trash-2'].toSvg({ class: 'font-small-4 me-50' }) +
-                        'Delete</a></div>' +
-                        '</div>'
-                    );
+                    if (isSuperAdmin) {
+                        var userView = '/editP/' + full.id;
+                        var userDelete = '/deleteP/' + full.id;
+                        return (
+                            '<div class="btn-group">' +
+                            '<a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">' +
+                            feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
+                            '</a>' +
+                            '<div class="dropdown-menu dropdown-menu-end">' +
+                            '<a href="' + userView + '" class="dropdown-item">' +
+                            feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
+                            'edit</a>' +
+                            '<a href="'+userDelete+'" class="dropdown-item delete-record">' +
+                            feather.icons['trash-2'].toSvg({ class: 'font-small-4 me-50' }) +
+                            'Delete</a></div>' +
+                            '</div>'
+                        );
+                    } else {
+                        // Si l'utilisateur n'est pas superadministrator, retournez une chaîne vide
+                        return '';
+                    }
                 }
             }
         ],
@@ -175,63 +242,64 @@ if (dtUserTable.length) {
                 next: '&nbsp;'
             }
         },
-        buttons: [
-            {
-                extend: 'collection',
-                className: 'btn btn-outline-secondary dropdown-toggle me-2',
-                text: feather.icons['external-link'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
-                buttons: [
-                    {
-                        extend: 'print',
-                        text: feather.icons['printer'].toSvg({ class: 'font-small-4 me-50' }) + 'Print',
-                        className: 'dropdown-item',
-                        exportOptions: { columns: [1, 2, 3, 4] }
-                    },
-                    {
-                        extend: 'csv',
-                        text: feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) + 'Csv',
-                        className: 'dropdown-item',
-                        exportOptions: { columns: [1, 2, 3, 4] }
-                    },
-                    {
-                        extend: 'excel',
-                        text: feather.icons['file'].toSvg({ class: 'font-small-4 me-50' }) + 'Excel',
-                        className: 'dropdown-item',
-                        exportOptions: { columns: [1, 2, 3, 4, 5, 6] }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: feather.icons['clipboard'].toSvg({ class: 'font-small-4 me-50' }) + 'Pdf',
-                        className: 'dropdown-item',
-                        exportOptions: { columns: [1, 2, 3, 4] }
-                    },
-                    {
-                        extend: 'copy',
-                        text: feather.icons['copy'].toSvg({ class: 'font-small-4 me-50' }) + 'Copy',
-                        className: 'dropdown-item',
-                        exportOptions: { columns: [1, 2, 3, 4] }
-                    }
-                ],
-                init: function (api, node, config) {
-                    $(node).removeClass('btn-secondary');
-                    $(node).parent().removeClass('btn-group');
-                    setTimeout(function () {
-                        $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
-                    }, 50);
-                }
-            },
-            {
-                text: 'Add New Produit',
-                className: 'add-new btn btn-primary',
-                attr: {
-                    'data-bs-toggle': 'modal',
-                    'data-bs-target': '#modals-slide-in'
-                },
-                init: function (api, node, config) {
-                    $(node).removeClass('btn-secondary');
-                }
-            }
-        ],
+        buttons: buttons,
+        // buttons: [
+        //     {
+        //         extend: 'collection',
+        //         className: 'btn btn-outline-secondary dropdown-toggle me-2',
+        //         text: feather.icons['external-link'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
+        //         buttons: [
+        //             {
+        //                 extend: 'print',
+        //                 text: feather.icons['printer'].toSvg({ class: 'font-small-4 me-50' }) + 'Print',
+        //                 className: 'dropdown-item',
+        //                 exportOptions: { columns: [1, 2, 3, 4] }
+        //             },
+        //             {
+        //                 extend: 'csv',
+        //                 text: feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) + 'Csv',
+        //                 className: 'dropdown-item',
+        //                 exportOptions: { columns: [1, 2, 3, 4] }
+        //             },
+        //             {
+        //                 extend: 'excel',
+        //                 text: feather.icons['file'].toSvg({ class: 'font-small-4 me-50' }) + 'Excel',
+        //                 className: 'dropdown-item',
+        //                 exportOptions: { columns: [1, 2, 3, 4, 5, 6] }
+        //             },
+        //             {
+        //                 extend: 'pdf',
+        //                 text: feather.icons['clipboard'].toSvg({ class: 'font-small-4 me-50' }) + 'Pdf',
+        //                 className: 'dropdown-item',
+        //                 exportOptions: { columns: [1, 2, 3, 4] }
+        //             },
+        //             {
+        //                 extend: 'copy',
+        //                 text: feather.icons['copy'].toSvg({ class: 'font-small-4 me-50' }) + 'Copy',
+        //                 className: 'dropdown-item',
+        //                 exportOptions: { columns: [1, 2, 3, 4] }
+        //             }
+        //         ],
+        //         init: function (api, node, config) {
+        //             $(node).removeClass('btn-secondary');
+        //             $(node).parent().removeClass('btn-group');
+        //             setTimeout(function () {
+        //                 $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
+        //             }, 50);
+        //         }
+        //     },
+        //     {
+        //         text: 'Add New Produit',
+        //         className: 'add-new btn btn-primary',
+        //         attr: {
+        //             'data-bs-toggle': 'modal',
+        //             'data-bs-target': '#modals-slide-in'
+        //         },
+        //         init: function (api, node, config) {
+        //             $(node).removeClass('btn-secondary');
+        //         }
+        //     }
+        // ],
         responsive: {
             details: {
                 display: $.fn.dataTable.Responsive.display.modal({

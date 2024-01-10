@@ -39,4 +39,9 @@ class Commande extends Model
     {
         return $this->hasMany(Commande_detail::class);
     }
+
+    public function produits()
+    {
+        return $this->belongsTo(Produit::class);
+    }
 }

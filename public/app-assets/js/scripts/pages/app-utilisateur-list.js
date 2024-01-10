@@ -23,7 +23,13 @@ $(function () {
             { data: 'id' },
             { data: 'name' },
             { data: 'email' },
-            { data: 'email' },
+            {
+                data: 'roles',
+                render: function(data, type, full) {
+                    return data.map(role => role.name).join(', ');
+                }
+            },
+            { data: 'roles' },
         ],
         columnDefs: [
             {
@@ -47,7 +53,7 @@ $(function () {
             },
 
             {
-                targets: 3,
+                targets: 4,
                 title: 'Actions',
                 orderable: false,
                 render: function (data, type, full) {

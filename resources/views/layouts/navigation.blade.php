@@ -59,12 +59,12 @@
                     <li class="nav-item"><a class="nav-link menu-toggle" href="#"><i class="ficon" data-feather="menu"></i></a></li>
                 </ul>
                 <ul class="nav navbar-nav bookmark-icons">
-                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Email"><i class="ficon" data-feather="mail"></i></a></li>
-                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chat"><i class="ficon" data-feather="message-square"></i></a></li>
-                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calendar.html" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Calendar"><i class="ficon" data-feather="calendar"></i></a></li>
-                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-todo.html" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todo"><i class="ficon" data-feather="check-square"></i></a></li>
+                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Email"><i class="ficon" data-feather="mail"></i></a></li>
+                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chat"><i class="ficon" data-feather="message-square"></i></a></li>
+                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Calendar"><i class="ficon" data-feather="calendar"></i></a></li>
+                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todo"><i class="ficon" data-feather="check-square"></i></a></li>
                 </ul>
-                <ul class="nav navbar-nav">
+                {{-- <ul class="nav navbar-nav">
                     <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"><i class="ficon text-warning" data-feather="star"></i></a>
                         <div class="bookmark-input search-input">
                             <div class="bookmark-input-icon"><i data-feather="search"></i></div>
@@ -72,11 +72,11 @@
                             <ul class="search-list search-list-bookmark"></ul>
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
             </div>
             <ul class="nav navbar-nav align-items-center ms-auto">
-                <li class="nav-item dropdown dropdown-language"><a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language">English</span></a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#" data-language="en"><i class="flag-icon flag-icon-us"></i> English</a><a class="dropdown-item" href="#" data-language="fr"><i class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="#" data-language="de"><i class="flag-icon flag-icon-de"></i> German</a><a class="dropdown-item" href="#" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Portuguese</a></div>
+                {{-- <li class="nav-item dropdown dropdown-language"><a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language">English</span></a> --}}
+                    {{-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#" data-language="en"><i class="flag-icon flag-icon-us"></i> English</a><a class="dropdown-item" href="#" data-language="fr"><i class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="#" data-language="de"><i class="flag-icon flag-icon-de"></i> German</a><a class="dropdown-item" href="#" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Portuguese</a></div> --}}
                 </li>
                 <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>
                 <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
@@ -87,7 +87,7 @@
                         <ul class="search-list search-list-main"></ul>
                     </div>
                 </li>
-                <li class="nav-item dropdown dropdown-cart me-25"><a class="nav-link" href="#" data-bs-toggle="dropdown"><i class="ficon" data-feather="shopping-cart"></i><span class="badge rounded-pill bg-primary badge-up cart-item-count">6</span></a>
+                {{-- <li class="nav-item dropdown dropdown-cart me-25"><a class="nav-link" href="#" data-bs-toggle="dropdown"><i class="ficon" data-feather="shopping-cart"></i><span class="badge rounded-pill bg-primary badge-up cart-item-count">6</span></a>
                     <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
                         <li class="dropdown-menu-header">
                             <div class="dropdown-header d-flex">
@@ -169,16 +169,16 @@
                             </div><a class="btn btn-primary w-100" href="app-ecommerce-checkout.html">Checkout</a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item dropdown dropdown-notification me-25"><a class="nav-link" href="#" data-bs-toggle="dropdown"><i class="ficon" data-feather="bell"></i><span class="badge rounded-pill bg-danger badge-up">5</span></a>
+                </li> --}}
+                <li class="nav-item dropdown dropdown-notification me-25"><a class="nav-link" href="#" data-bs-toggle="dropdown"><i class="ficon" data-feather="bell"></i><span class="badge rounded-pill bg-danger badge-up">0</span></a>
                     <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
                         <li class="dropdown-menu-header">
                             <div class="dropdown-header d-flex">
                                 <h4 class="notification-title mb-0 me-auto">Notifications</h4>
-                                <div class="badge rounded-pill badge-light-primary">6 New</div>
+                                <div class="badge rounded-pill badge-light-primary">0 New</div>
                             </div>
                         </li>
-                        <li class="scrollable-container media-list"><a class="d-flex" href="#">
+                        {{-- <li class="scrollable-container media-list"><a class="d-flex" href="#">
                                 <div class="list-item d-flex align-items-start">
                                     <div class="me-1">
                                         <div class="avatar"><img src="{{asset('app-assets/images/portrait/small/avatar-s-15.jpg')}}" alt="avatar" width="32" height="32"></div>
@@ -248,8 +248,8 @@
                                     </div>
                                 </div>
                             </a>
-                        </li>
-                        <li class="dropdown-menu-footer"><a class="btn btn-primary w-100" href="#">Read all notifications</a></li>
+                        </li> --}}
+                        {{-- <li class="dropdown-menu-footer"><a class="btn btn-primary w-100" href="#">Read all notifications</a></li> --}}
                     </ul>
                 </li>
                 <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -308,8 +308,12 @@
                 <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
             </ul>
         </div>
+        @php
+            use Illuminate\Support\Str;
+        @endphp
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
+            @role('superadministrator')
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
                     <ul class="menu-content">
@@ -321,18 +325,32 @@
                 </li>
                 <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
                 </li>
-                @php
-                    use Illuminate\Support\Str;
-                @endphp
+
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'produit') || Str::startsWith(request()->path(), 'editP') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('produit.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Produit</span></a>
                 <li class=" nav-item  {{ Str::startsWith(request()->path(), 'categorie') || Str::startsWith(request()->path(), 'editCategorie') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('categorie.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Categorie</span></a>
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'fournisseur') || Str::startsWith(request()->path(), 'editFournisseur') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('fournisseur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Fournisseur</span></a>
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'commande') || Str::startsWith(request()->path(), 'editCommande') || Str::startsWith(request()->path(), 'addCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande</span></a>
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'livreur') || Str::startsWith(request()->path(), 'voirCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('livreur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Livreur</span></a>
                 <li class=" nav-item {{ Route::is(['client.*']) ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('client.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a>
-                <li class=" nav-item {{ Route::is(['magasinier.*']) ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('magasinier.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Magasinier</span></a>
+
+                <li class=" nav-item {{ Str::startsWith(request()->path(), 'magasinier') || Str::startsWith(request()->path(), 'detail_produit') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('magasinier.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Magasinier</span></a>
                 </li>
             </ul>
+            @endrole
+            @role('Magasinier')
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'magasinier') || Str::startsWith(request()->path(), 'detail_produit') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('magasinier.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Magasinier</span></a>
+                    </li>
+                </ul>
+            @endrole
+            @role('agent')
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'produit') || Str::startsWith(request()->path(), 'editP') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('produit.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Produit</span></a>
+                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'commande') || Str::startsWith(request()->path(), 'editCommande') || Str::startsWith(request()->path(), 'addCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande</span></a>
+                    <li class=" nav-item {{ Str::startsWith(request()->path(), 'livreur') || Str::startsWith(request()->path(), 'voirCommande') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('livreur.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Livreur</span></a>
+                    <li class=" nav-item {{ Route::is(['client.*']) ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('client.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a>
+                </ul>
+            @endrole
         </div>
     </div>
     <!-- END: Main Menu-->
@@ -344,6 +362,7 @@
         <div class="content-wrapper container-xxl p-0">
             <div class="content-header row">
             </div>
+
             <div class="content-body">
                 {{ $slot }}
                 <!-- Dashboard Analytics Start -->

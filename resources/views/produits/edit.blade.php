@@ -21,6 +21,7 @@
                                     <input type="number" value="{{$produit->unity}}" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="" name="unity" required />
                                 </div>
                             </div>
+                            @if(Auth::user()->hasRole('superadministrator'))
                             <div class="row">
                                 <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-uname">Prix d'achat</label>
@@ -35,6 +36,7 @@
                                     <input type="text" value="{{$produit->description}}" id="basic-icon-default-email" class="form-control dt-email" placeholder="Coca cola petit" name="description"/>
                                 </div>
                             </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-contact">Categorie</label>

@@ -24,7 +24,9 @@
                                     <th>Prix d'achat</th>
                                     <th>Prix de vente</th>
                                     <th>categorie</th>
+                                    {{-- @role('superadministrator') --}}
                                     <th>Actions</th>
+                                    {{-- @endrole --}}
                                 </tr>
                             </thead>
                         </table>
@@ -43,10 +45,10 @@
                                         <label class="form-label" for="basic-icon-default-fullname">Name</label>
                                         <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Coca " name="name" required/>
                                     </div>
-                                    <div class="mb-1">
+                                    {{-- <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">Reference</label>
                                         <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CO-PM 02 " name="reference" required />
-                                    </div>
+                                    </div> --}}
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">unité</label>
                                         <input type="number" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="" name="unity" required />
@@ -108,4 +110,7 @@
             </section>
         </div>
     </div>
+    <script>
+        var isSuperAdmin = @json(auth()->user()->hasRole('superadministrator'));
+    </script>
 </x-app-layout>

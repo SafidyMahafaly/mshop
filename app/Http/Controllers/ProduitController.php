@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProduitRequest;
-use App\Http\Requests\UpdateProduitRequest;
+use App\Models\Produit;
 use App\Models\Categorie;
 use App\Models\Fournisseur;
-use App\Models\Produit;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreProduitRequest;
+use App\Http\Requests\UpdateProduitRequest;
 
 class ProduitController extends Controller
 {
@@ -21,7 +22,21 @@ class ProduitController extends Controller
     }
 
     public function getProduit(){
-        $produits = Produit::with('categorie')->get();
+        $user = Auth::user();
+        $produits = Produit::with('categorie')
+        ->when($user->hasRole('agent'), function ($query) {
+            // Si l'utilisateur a le rôle 'agent', ajoutez la condition sur 'selling_price'
+            $query->where('selling_price', '!=', null);
+        })
+        ->get();
+        $produits->transform(function ($produit) use ($user) {
+            // Si l'utilisateur a le rôle 'agent', définissez le prix d'achat sur 0
+            if ($user->hasRole('agent')) {
+                $produit->purchase_price = 0;
+            }
+
+            return $produit;
+        });
         return response()->json($produits);
     }
 

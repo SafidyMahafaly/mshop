@@ -19,6 +19,7 @@
                                     <th>id</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -27,7 +28,7 @@
                     <!-- Modal to add new user starts-->
                     <div class="modal modal-slide-in new-user-modal fade" id="modals-fournisseur-in">
                         <div class="modal-dialog">
-                            <form class="modal-content pt-0" action="{{route('livreur.store')}}" method="POST">
+                            <form class="modal-content pt-0" action="{{route('utilisateur.store')}}" method="POST">
                                 @csrf
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                                 <div class="modal-header mb-1">
@@ -39,8 +40,23 @@
                                         <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="ex : Kanto " name="name" required/>
                                     </div>
                                     <div class="mb-1">
-                                        <label class="form-label" for="basic-icon-default-fullname">Phone</label>
-                                        <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="ex :  0345092565" name="phone" required/>
+                                        <label class="form-label" for="basic-icon-default-fullname">Email</label>
+                                        <input type="email" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="ex :  Kanto@gmail.com" name="email" required/>
+                                    </div>
+                                    <div class="mb-1">
+                                        <label class="form-label" for="basic-icon-default-fullname">Password</label>
+                                        <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname"  name="password" required/>
+                                    </div>
+                                    <div class="mb-1">
+                                        <label class="form-label" for="basic-icon-default-contact">Role</label>
+                                        <select id="country" name="role" class=" form-select" required>
+                                            <option value="" selected hidden>Selectioner role</option>
+                                            <option value="Admin" >Admin</option>
+                                            <option value="Agent" >Agent</option>
+                                            <option value="Magasinier">Magasinier</option>
+
+
+                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary me-1 data-submit">Submit</button>
                                     <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>

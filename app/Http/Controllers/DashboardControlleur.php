@@ -12,9 +12,12 @@ class DashboardControlleur extends Controller
 {
     public function index()
     {
-        // $beneficeJournalier = Commande::whereDate('created_at', today())->sum(function ($commande) {
+        // $commandes = Commande::whereDate('created_at', today())->get();
+
+        // $beneficeJournalier = $commandes->sum(function ($commande) {
         //     return $commande->produits->sum('prix_vente') - $commande->produits->sum('prix_achat');
         // });
+        // dd($beneficeJournalier);
 
 
 

@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     //route utilisateur
     Route::get('/utilisateur',[UserControlleur::class,'index'])->name('utilisateur.index');
     Route::get('/getUtilisateur',[UserControlleur::class,'getUtilisateur']);
+    Route::post('/save_user',[UserControlleur::class,'store'])->name('utilisateur.store');
     //fin utilisateur
 
 
@@ -116,6 +117,8 @@ Route::middleware('auth')->group(function () {
     //Route magasinier
     Route::get('/magasinier',[MagasinerControlleur::class,'index'])->name('magasinier.index');
     Route::get('/detail_produit/{id}',[MagasinerControlleur::class,'detail']);
+    Route::post('/magasinier_entre/{id}',[MagasinerControlleur::class,'entre'])->name('magasinier.entre');
+    Route::post('/magasinier_sortie/{id}',[MagasinerControlleur::class,'sortie'])->name('magasinier.sortie');
     //fin route magasinier
 
 });
