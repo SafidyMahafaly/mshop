@@ -16,6 +16,7 @@ class MagasinerControlleur extends Controller
     }
     public function detail($id)
     {
+        $aujourdhui = Carbon::now()->toDateString();
         $produit = Produit::findOrFail($id);
         $historique = Historique::where('produit_id',$id)->get();
         $dateCreation = $produit->created_at;
@@ -34,7 +35,7 @@ class MagasinerControlleur extends Controller
         } else {
             $message = " {$diffEnMinutes} minute(s).";
         }
-        return view('magasinier.detail',compact('produit','message','historique'));
+        return view('magasinier.detail',compact('produit','message','historique','aujourdhui'));
     }
     public function entre(Request $request,$id)
     {

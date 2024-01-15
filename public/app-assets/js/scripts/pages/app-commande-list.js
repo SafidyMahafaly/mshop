@@ -98,7 +98,6 @@ $(function () {
                 if (response.length > 0) {
                     // Afficher le tableau s'il y a des commandes
                     $('.recap').show();
-                    console.log(response)
 
                     // Sélectionner la table
                     var table = $('.recapCommande');
@@ -151,6 +150,7 @@ $(function () {
         $('#client_id').val(id);
         $('#phone').val(phone);
         $('#adress').val(adress);
+        $('#lieu_livraison').val(adress);
         $('#fb_name').val(fb_name);
         $('#name').val(name);
         $('#client_suggerer').empty();
@@ -160,7 +160,7 @@ $(function () {
         var cle = $(this).val();
         var produitSuggerer = $(this).siblings('.contenue').find('.produit_suggerer');
 
-        if (cle.length >= 3) {
+        if (cle.length >= 1) {
             $.ajax({
                 type: "GET",
                 url: "/getProduitCom",

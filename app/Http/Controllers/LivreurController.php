@@ -50,7 +50,8 @@ class LivreurController extends Controller
             }else{
                 $date = Carbon::today();;
             }
-            return view('livreur.list_cmd', compact('commandes', 'livreur','date','id'));
+            $livreurs = Livreur::all();
+            return view('livreur.list_cmd', compact('commandes', 'livreur','date','id','livreurs'));
         }
     }
 
@@ -62,6 +63,15 @@ class LivreurController extends Controller
         }
         Commande::whereIn('id',$request->id)->update(['status' => '3']);
         Commande::whereIn('id',$request->id)->update(['payer' => '1']);
+        return response()->json();
+    }
+
+    public function changeStatusLivreur(StoreLivreurRequest $request)
+    {
+        $commande = Commande::whereIn('id',$request->id)->get();
+        foreach($commande as $com){
+            Livreur_commande::where('commande_id',$com->id)->update(['livreur_id' => $request->livreur]);
+        }
         return response()->json();
     }
 

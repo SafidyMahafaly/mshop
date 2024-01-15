@@ -97,6 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/voirCommande/{id}/{date?}',[LivreurController::class,'voir_commande']);
     Route::get('/genererPDF/{id}/{date}',[LivreurController::class,'genererPDF']);
     Route::get('/changeStatusLivre',[LivreurController::class,'changeStatus']);
+    Route::get('/changeStatusLivreur',[LivreurController::class,'changeStatusLivreur']);
     Route::get('/changeStatusAnnuler',[LivreurController::class,'changeStatusAnnuler']);
     Route::get('/changeStatusReporter',[LivreurController::class,'changeStatusReporter']);
     Route::get('/editLivreur/{id}', [LivreurController::class,'edit'])->name('livreur.edit');

@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Nom du client</label>
-                                    <input type="text" value="" class="form-control dt-full-name" id="name" placeholder="ex : Safidy Mahafaly " name="name_client" required/>
+                                    <input type="text" value="" class="form-control dt-full-name" id="name" placeholder="ex : Safidy Mahafaly " name="name_client" />
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Nom fb</label>
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="col-md-4 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">Quatité</label>
-                                        <input type="number" value="" class="form-control dt-full-name" name="quantite[]" id="basic-icon-default-fullname" placeholder="quantity"  required/>
+                                        <input type="number" value="" class="form-control " name="quantite[]" id="basic-icon-default-fullname" placeholder="quantity"  required/>
                                     </div>
                                     <div class="col-md-2 mt-2">
                                         <button class="btn btn-primary add-card">Add</button>
@@ -99,9 +99,9 @@
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-contact">Source</label>
                                         <select id="country" name="source" class="form-select">
-                                            <option value="" selected hidden>Selectioner la source du commande</option>
+                                            {{-- <option value="" selected hidden>Selectioner la source du commande</option> --}}
                                             <option value="SMS" >SMS</option>
-                                            <option value="Facebook" >Facebook</option>
+                                            <option value="Facebook" selected >Facebook</option>
                                             <option value="TikTOk" >TikTOk</option>
                                             <option value="Appel" >Appel</option>
                                             <option value="Recuperation" >Recuperation</option>
@@ -142,7 +142,7 @@
                                     </div>
                                     <div class="col-md-3 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">date</label>
-                                        <input type="date" value="" class="form-control dt-full-name"  id="basic-icon-default-fullname"  name="date_livraison" />
+                                        <input type="date" value="{{ $aujourdhui }}" class="form-control dt-full-name"  id="basic-icon-default-fullname"  name="date_livraison" />
                                     </div>
                                     <div class="col-md-3 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">Heure</label>

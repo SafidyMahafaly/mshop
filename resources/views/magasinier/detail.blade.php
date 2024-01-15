@@ -37,13 +37,13 @@
                                                 </div>
                                                 <p>Creation du produit </p>
                                                 <div class="d-flex flex-row align-items-center">
-                                                    <div class="avatar me-50">
+                                                    {{-- <div class="avatar me-50">
                                                         <img src="../../../app-assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar" width="38" height="38" />
-                                                    </div>
-                                                    <div class="user-info">
+                                                    </div> --}}
+                                                    {{-- <div class="user-info">
                                                         <h6 class="mb-0">Safidy Mahafaly (Magasinier)</h6>
                                                         <p class="mb-0">Mshop Gagdet</p>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </li>
@@ -82,7 +82,7 @@
                                             <div class="col-12">
                                                 <div class="mb-2">
                                                     <label class="form-label" for="payment-expiry">Date</label>
-                                                    <input type="date" id="payment-expiry" name="date" class="form-control" placeholder="MM / YY" />
+                                                    <input type="date" value="{{$aujourdhui}}" id="payment-expiry" name="date" class="form-control" placeholder="MM / YY" />
                                                 </div>
                                             </div>
                                             <div class="d-grid col-12">
@@ -110,7 +110,7 @@
                                             <div class="col-6">
                                                 <div class="mb-2">
                                                     <label class="form-label" for="payment-expiry">Date</label>
-                                                    <input type="date"  id="payment-expiry" class="form-control" placeholder="MM / YY" />
+                                                    <input type="date" value="{{$aujourdhui}}"  id="payment-expiry" class="form-control" placeholder="MM / YY" />
                                                 </div>
                                             </div>
                                             <div class="col-12">

@@ -80,6 +80,7 @@
                             <button  data-bs-toggle="modal" data-bs-target="#livraisonLivre"  class="btn btn-primary mt-2 livraison" ><i class="fa-solid fa-motorcycle"></i>&nbsp;Livré</button>
                             <button id="" data-bs-toggle="modal" data-bs-target="#livraisonAnnule" class="btn btn-dark mt-2 livraison"><i class="fa-solid fa-ban"></i>&nbsp;Annuler</button>
                             <button id="" data-bs-toggle="modal" data-bs-target="#livraisonReporter" class="btn btn-info mt-2 livraison" id="livraison"><i class="fa-regular fa-calendar-check"></i>&nbsp;Reporter</button>
+                            <button id="" data-bs-toggle="modal" data-bs-target="#changement" class="btn btn-secondary mt-2 livraison" id="livraison"><i class="fa-regular fa-calendar-check"></i>&nbsp;livreur</button>
                             {{-- <button id="" class="btn btn-danger mt-2"><i class="fa-solid fa-trash"></i>&nbsp;Supprimer</button>
                             <button id="" class="btn btn-success mt-2"><i class="fa-solid fa-cart-shopping"></i>&nbsp;Payement</button> --}}
                         </div>
@@ -157,6 +158,35 @@
                                     </div>
                                     <div class="col-12 text-center">
                                         <button type="submit" id="reporter" class="btn btn-primary me-1 mt-1">Valider</button>
+                                        <button type="reset" class="btn btn-outline-secondary mt-1" data-bs-dismiss="modal" aria-label="Close">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="changement" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-transparent">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body px-sm-5 mx-50 pb-5">
+                                <h1 class="text-center mb-1" id="addNewCardTitle">Changement livreur</h1>
+                                <form id="addNewCardValidation" class="row gy-1 gx-2 mt-75" onsubmit="return false">
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="modalAddCardName">Selectioner livreur</label>
+                                        <select id="liv_id" name="liv_id" class=" form-select" required>
+                                            <option value="" selected hidden>Selectioner livreur</option>
+                                            @foreach ($livreurs as $liv)
+                                                <option value="{{$liv->id}}" >{{$liv->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button type="submit" id="changementLiv" class="btn btn-primary me-1 mt-1">Valider</button>
                                         <button type="reset" class="btn btn-outline-secondary mt-1" data-bs-dismiss="modal" aria-label="Close">
                                             Cancel
                                         </button>

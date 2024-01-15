@@ -70,7 +70,8 @@ class CommandeController extends Controller
      */
     public function create()
     {
-        return view('commandes.create');
+        $aujourdhui = Carbon::now()->toDateString();
+        return view('commandes.create',compact('aujourdhui'));
     }
 
     public function getClient(Request $request)

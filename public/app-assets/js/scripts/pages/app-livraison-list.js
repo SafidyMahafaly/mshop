@@ -79,6 +79,30 @@ $('#reporter').on('click', function () {
         alert("Veuillez sélectionner au moins une commande.");
     }
 });
+$('#changementLiv').on('click', function () {
+    var checkedCheckboxes = $('.select-commande:checked');
+
+    if (checkedCheckboxes.length > 0) {
+        var checkedIds = checkedCheckboxes.map(function () {
+            return $(this).data('id');
+        }).get();
+        var livreur = $('#liv_id').val();
+        $.ajax({
+            type: "GET",
+            url: "/changeStatusLivreur",
+            data: {
+                id : checkedIds,
+                livreur : livreur
+            },
+            dataType: "json",
+            success: function (response) {
+                location.reload();
+            }
+        });
+    } else {
+        alert("Veuillez sélectionner au moins une commande.");
+    }
+});
 $('#livree').on('click', function () {
     var checkedCheckboxes = $('.select-commande:checked');
 
