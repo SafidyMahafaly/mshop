@@ -100,14 +100,18 @@ class CommandeController extends Controller
      */
     public function store(StoreCommandeRequest $request)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try {
             if($request->client_id){
                 $client_id = $request->client_id;
             }else{
+                if($request->name_client){
+                    $nom = $request->name_client;
+                }else{
+                    $nom = $request->fb_name;
+                }
                 $client = Client::create([
-                    'name'    => $request->name_client,
+                    'name'    => $nom,
                     'fb_name' => $request->fb_name,
                     'phone' => $request->phone,
                     'adress' => $request->adress,
@@ -119,6 +123,11 @@ class CommandeController extends Controller
             }else{
                 $date =  Carbon::today();
             }
+            if($request->lieux_livraison){
+                $lieu = $request->lieux_livraison;
+            }else{
+                $lieu = $client->adress;
+            }
             $commande = Commande::create([
                 'user_id'         => Auth::id(),
                 'client_id'       => $client_id,
@@ -126,7 +135,7 @@ class CommandeController extends Controller
                 'status'          => 1,
                 'source'          => $request->source,
                 'remarque'        => $request->remarque,
-                'lieu_livraison'  => $request->lieux_livraison,
+                'lieu_livraison'  => $lieu,
                 'date_livraison'  => $request->date_livraison,
                 'heure'           => $request->heure_livraison,
                 'frais_livraison' => $request->frais_livraison,
@@ -164,7 +173,6 @@ class CommandeController extends Controller
             $commande_livrai = Commande::where('id',$commande[$i])->first();
             $existe = Livreur_commande::where('commande_id',$commande[$i])->first();
             if($existe){
-
                 if($existe->livreur_id !== $livreur_id){
                     Livreur_commande::where('commande_id',$commande[$i])->delete();
                     Livreur_commande::create([
@@ -229,7 +237,6 @@ class CommandeController extends Controller
             'user_id'         => Auth::id(),
             'client_id'       => $client_id,
             'total'           => $request->somme,
-            // 'status'          => 1,
             'source'          => $request->source,
             'remarque'        => $request->remarque,
             'lieu_livraison'  => $request->lieux_livraison,
@@ -270,10 +277,6 @@ class CommandeController extends Controller
     public function facturation($id)
     {
         $commande = Commande::with('client', 'user', 'details.produit')->findOrFail($id);
-        // dd($commande);
-        // foreach($commande->details as $d){
-        //     dd($d);
-        // }
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         // Définir la taille du papier A5
@@ -289,7 +292,6 @@ class CommandeController extends Controller
 
         // Utilisez la méthode loadView sur l'instance de la classe PDF
         $livraison_pdf = $pdf->loadView('commandes.facturationPdf', compact('commande',));
-
         return $livraison_pdf->stream('commandes.facturationPdf');
     }
 }

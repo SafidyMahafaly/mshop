@@ -61,8 +61,11 @@ class LivreurController extends Controller
         foreach($commande as $com){
             Client::where('id',$com->client_id)->update(['remarque' => $request->remarque]);
         }
-        Commande::whereIn('id',$request->id)->update(['status' => '3']);
-        Commande::whereIn('id',$request->id)->update(['payer' => '1']);
+        Commande::whereIn('id',$request->id)->update([
+            'status' => '3',
+            'payer' => '1',
+            'mode_payement' => $request->mode
+        ]);
         return response()->json();
     }
 

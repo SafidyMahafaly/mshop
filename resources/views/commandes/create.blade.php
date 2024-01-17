@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Nom fb</label>
-                                    <input type="text" value="" class="form-control dt-full-name" id="fb_name" placeholder="ex : Safidy Mahafaly " name="fb_name" />
+                                    <input type="text" value="" class="form-control dt-full-name" id="fb_name" placeholder="ex : Safidy Mahafaly " name="fb_name" required/>
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Adresse</label>
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-md-3 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">Frais</label>
-                                        <input type="number" value="" class="form-control dt-full-name" id="frais_livraison" placeholder="3000 aR" name="frais_livraison" />
+                                        <input type="number" value="" class="form-control dt-full-name" id="frais_livraison" placeholder="3000 aR" name="frais_livraison" required/>
                                     </div>
                                     <div class="col-md-3 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">date</label>

@@ -111,12 +111,15 @@ $('#livree').on('click', function () {
             return $(this).data('id');
         }).get();
         var remarque = $('#remarque_livre').val();
+        var mode = $('#mode_payement').val();
+        // alert(mode)
         $.ajax({
             type: "GET",
             url: "/changeStatusLivre",
             data: {
                 id : checkedIds,
-                remarque : remarque
+                remarque : remarque,
+                mode : mode
             },
             dataType: "json",
             success: function (response) {
@@ -134,6 +137,7 @@ if (dtUserTable.length) {
 
     dtUserTable.DataTable({
         order: [[1, 'desc']],
+        paging: false,
         dom:
             '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"' +
             '<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l>' +

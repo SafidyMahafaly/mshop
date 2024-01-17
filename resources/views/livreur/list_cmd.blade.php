@@ -96,6 +96,14 @@
                                 <h1 class="text-center mb-1" id="addNewCardTitle">Livraison livré</h1>
                                 <form id="addNewCardValidation" class="row gy-1 gx-2 mt-75" onsubmit="return false">
                                     <div class="col-md-12">
+                                        <label class="form-label" for="modalAddCardName"> Mode de mayement</label>
+                                        <select id="mode_payement" name="mode_payement" class="form-select" required>
+                                            <option value="" selected hidden>Selectioner la mode de payement</option>
+                                            <option value="Mobil Money" >Mobil Money</option>
+                                            <option value="Espece" >Espece</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
                                         <label class="form-label" for="modalAddCardName">Remarque sur le client</label>
                                         <input type="text" id="remarque_livre"  class="form-control" placeholder="Masostay eee na we manja be" />
                                     </div>

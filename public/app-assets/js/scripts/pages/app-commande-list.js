@@ -525,13 +525,18 @@ function updateExportButton() {
 $('.a_livrer').on('change',function(){
     // alert($(this).val())
     var valeur = $(this).val()
+
     if(valeur == 1){
+        $('#frais_livraison').val(3000);
+        calculerSommeTotale()
         $('#livrer').show();
-        $('#lieu_livraison').prop('required', true);
+        // $('#lieu_livraison').prop('required', true);
         $('#frais_livraison').prop('required', true);
     }else{
+        $('#frais_livraison').val(0);
+        calculerSommeTotale()
         $('#livrer').hide();
-        $('#lieu_livraison').prop('required', false);
+        // $('#lieu_livraison').prop('required', false);
         $('#frais_livraison').prop('required', false);
     }
 })
