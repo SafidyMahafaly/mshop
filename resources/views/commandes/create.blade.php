@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-md-3 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">Frais</label>
-                                        <input type="number" value="" class="form-control dt-full-name" id="frais_livraison" placeholder="3000 aR" name="frais_livraison" required/>
+                                        <input type="number" value="" class="form-control dt-full-name" id="frais_livraison" placeholder="3000 aR" name="frais_livraison" />
                                     </div>
                                     <div class="col-md-3 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">date</label>

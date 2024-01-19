@@ -92,10 +92,9 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="card card-payment">
+                            {{-- <div class="card card-payment">
                                 <div class="card-header">
                                     <h4 class="card-title">Nouvelle sortie</h4>
-                                    {{-- <h4 class="card-title text-primary">$455.60</h4> --}}
                                 </div>
                                 <div class="card-body">
                                     <form action="{{route('magasinier.sortie',$produit->id)}}" method="POST" class="form">
@@ -125,7 +124,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <!--/ Payment Card -->
                     </div>

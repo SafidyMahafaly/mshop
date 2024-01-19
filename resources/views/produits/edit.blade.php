@@ -16,10 +16,12 @@
                                     <label class="form-label" for="basic-icon-default-fullname">Reference</label>
                                     <input type="text" value="{{$produit->reference}}" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CO-PM 02 " name="reference" required />
                                 </div>
+                                @if(Auth::user()->hasRole('superadministrator'))
                                 <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">unité</label>
                                     <input type="number" value="{{$produit->unity}}" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="" name="unity" required />
                                 </div>
+                                @endif
                             </div>
                             @if(Auth::user()->hasRole('superadministrator'))
                             <div class="row">
