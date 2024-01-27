@@ -92,6 +92,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/recup_add',[CommandeController::class,'create_recuperation']);
     Route::post('/commandeRecupAdd',[CommandeController::class,'store_recuperation'])->name('commande.storeRecuperation');
     Route::get('/editionommandeRecup/{id}',[CommandeController::class,'editRecup']);
+    Route::get('/liste-commande-livre-agent',[CommandeController::class,'commandeDejaLivre'])->name('commande.deja_livre');
+    Route::post('/get-commande-livre-agent',[CommandeController::class,'getCommandeDejaLivre'])->name('commande.get_cmd_livre');
     //fin commande
 
 
