@@ -85,8 +85,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/livreur_commande',[CommandeController::class,'lireurCommande']);
     Route::get('/editCommande/{id}',[CommandeController::class,'edit']);
     Route::post('/updateCommande/{id}',[CommandeController::class,'update'])->name('commande.update');
+    Route::post('/updateCommandeReup/{id}',[CommandeController::class,'updateRecup'])->name('commande.updateRecup');
     Route::get('/deleteCommande/{id}',[CommandeController::class,'destroy']);
     Route::get('/commande/facturation/{id}',[CommandeController::class,'facturation']);
+    Route::get('/recupretion',[CommandeController::class,'recuperation'])->name('commande.recuperation');
+    Route::get('/recup_add',[CommandeController::class,'create_recuperation']);
+    Route::post('/commandeRecupAdd',[CommandeController::class,'store_recuperation'])->name('commande.storeRecuperation');
+    Route::get('/editionommandeRecup/{id}',[CommandeController::class,'editRecup']);
     //fin commande
 
 

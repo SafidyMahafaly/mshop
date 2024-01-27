@@ -265,6 +265,7 @@
                 <li class=" nav-item {{ Route::is(['client.*']) ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('client.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a>
 
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'magasinier') || Str::startsWith(request()->path(), 'detail_produit') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('magasinier.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Magasinier</span></a>
+                <li class=" nav-item {{ Str::startsWith(request()->path(), 'recupretion') || Str::startsWith(request()->path(), 'editionommandeRecup') ||  Str::startsWith(request()->path(), 'recup_add') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.recuperation')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Recuperation</span></a>
                 </li>
             </ul>
             @endrole

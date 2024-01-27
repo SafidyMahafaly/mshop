@@ -42,7 +42,7 @@ class CommandeController extends Controller
     $date = $request->input('date');
 
     // Construire la requête en fonction de la date
-    $query = Commande::with('client', 'user', 'details.produit');
+    $query = Commande::with('client', 'user', 'details.produit')->where('status','!=','6');
 
     if ($user->hasRole('agent')) {
         // Si l'utilisateur a le rôle 'agent', filtrez les commandes par son ID d'utilisateur
@@ -73,6 +73,51 @@ class CommandeController extends Controller
     {
         $aujourdhui = Carbon::now()->toDateString();
         return view('commandes.create',compact('aujourdhui'));
+    }
+
+
+    public function recuperation()
+    {
+        $commandes = Commande::where('status',6)->with('client', 'user', 'details.produit')->get();
+        return view('recuperation.index',compact('commandes'));
+    }
+
+    public function create_recuperation()
+    {
+        return view('recuperation.create');
+    }
+
+
+
+    public function editRecup($id){
+        $commande = Commande::with('client', 'user', 'details.produit')->findOrFail($id);
+        return view('recuperation.edit',compact('commande'));
+    }
+
+
+    public function updateRecup(Request $request,$id){
+        $commande = Commande::findOrFail($id);
+        $client = Client::where('id',$request->client_id)->first();
+        $client->update([
+            'name'    => $request->name_client,
+        ]);
+
+        $commande->update([
+            'total' => $request->somme,
+        ]);
+        Commande_detail::where('commande_id',$id)->delete();
+        $produit = $request->id_produit;
+        $quatite = $request->quantite;
+        $prix    = $request->prix_vente;
+        for($i = 0; $i < count($produit); $i++){
+            Commande_detail::create([
+                'commande_id' => $commande->id,
+                'produit_id'  => $produit[$i],
+                'quantity'    => $quatite[$i],
+                'prix'        => $prix[$i]
+            ]);
+        }
+        return redirect('/recupretion');
     }
 
     public function getClient(Request $request)
@@ -160,6 +205,47 @@ class CommandeController extends Controller
             }
             DB::commit();
             return redirect()->route('commande.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back();
+        }
+    }
+
+    public function store_recuperation(StoreCommandeRequest $request){
+        DB::beginTransaction();
+        try {
+            $client = Client::create([
+                'name'    => $request->name_client,
+            ]);
+            $payer = 1;
+            $client_id = $client->id;
+            $date =  Carbon::today();
+            $commande = Commande::create([
+                'user_id'         => Auth::id(),
+                'client_id'       => $client_id,
+                'total'           => $request->somme,
+                'status'          => 6,
+                'payer'           => $payer,
+                'created_at'      => $date
+            ]);
+            // dd($commande);
+            $produit = $request->id_produit;
+            $quatite = $request->quantite;
+            $prix    = $request->prix_vente;
+            for($i = 0; $i < count($produit); $i++){
+                Commande_detail::create([
+                    'commande_id' => $commande->id,
+                    'produit_id'  => $produit[$i],
+                    'quantity'    => $quatite[$i],
+                    'prix'        => $prix[$i]
+                ]);
+                $prod = Produit::find($produit[$i]);
+                $prod->update([
+                    'unity' => $prod->unity -  $quatite[$i]
+                ]);
+            }
+            DB::commit();
+            return redirect('/recupretion');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back();

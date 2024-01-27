@@ -9,7 +9,7 @@
 ==========================================================================================*/
 $(function () {
     ('use strict');
-  
+
     var dataTableClient = $('.client-list-table')
     // Users List datatable
     if (dataTableClient.length) {
@@ -45,7 +45,7 @@ $(function () {
                       return '<p>' + columnData + '</p>';
                   }
               },
-  
+
               {
                   targets: 4,
                   title: 'Actions',
@@ -62,9 +62,6 @@ $(function () {
                                     '<a href="' + editClient + '" class="dropdown-item">' +
                                         feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
                                     'edit</a>' +
-                                    '<a href="'+destroyClient+'" class="dropdown-item delete-record">' +
-                                        feather.icons['trash-2'].toSvg({ class: 'font-small-4 me-50' }) +
-                                    'Delete</a>'+
                                 '</div>' +
                             '</div>'
                       );
@@ -136,7 +133,7 @@ $(function () {
           },
           initComplete: function () {
               var filterColumns = [2, 3, 5];
-  
+
               filterColumns.forEach(function (index) {
                   var column = this.api().columns(index);
                   var label = $('<label class="form-label" for="UserFilter' + index + '">Filter</label>').appendTo('.user_filter_' + index);
@@ -148,7 +145,7 @@ $(function () {
                           var val = $.fn.dataTable.util.escapeRegex($(this).val());
                           column.search(val ? '^' + val + '$' : '', true, false).draw();
                       });
-  
+
                   column
                       .data()
                       .unique()
@@ -160,10 +157,9 @@ $(function () {
           }
       });
   }
-  
+
     // Form Validation
-  
+
     // Phone Number
-    
+
   });
-  
