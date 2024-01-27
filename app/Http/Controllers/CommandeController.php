@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCommandeRequest;
 use App\Http\Requests\UpdateCommandeRequest;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -294,5 +295,28 @@ class CommandeController extends Controller
         // Utilisez la méthode loadView sur l'instance de la classe PDF
         $livraison_pdf = $pdf->loadView('commandes.facturationPdf', compact('commande',));
         return $livraison_pdf->stream('commandes.facturationPdf');
+    }
+
+    public function commandeDejaLivre()
+    {
+        $listeAgents = User::whereHas('roles', function($query){
+                                $query->where('name','agent');
+                            })->get();
+        $commandes = Commande::where('status',3)->with(['client','details.produit'])->get();
+
+        return view('commandes.commandeDejaLivre', compact('listeAgents','commandes'));
+    }
+
+    public function getCommandeDejaLivre(Request $request)
+    {
+        // Récupérer le mois et l'année à partir de la valeur du champ du formulaire
+        $moisSelectionne = $request->date;
+
+        // Convertir le format "mois-année" en deux variables distinctes (mois et année)
+        list($annee, $mois) = explode('-', $moisSelectionne);
+
+        $commandes = Commande::where('user_id',$request->user_id)->where('status',3)->whereRaw("MONTH(updated_at) = $mois AND YEAR(updated_at) = $annee")->with(['client','details.produit'])->get();
+
+        return redirect()->route('commande.deja_livre')->with('commandes', $commandes);
     }
 }

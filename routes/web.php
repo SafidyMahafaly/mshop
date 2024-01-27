@@ -87,6 +87,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/updateCommande/{id}',[CommandeController::class,'update'])->name('commande.update');
     Route::get('/deleteCommande/{id}',[CommandeController::class,'destroy']);
     Route::get('/commande/facturation/{id}',[CommandeController::class,'facturation']);
+    Route::get('/liste-commande-livre-agent',[CommandeController::class,'commandeDejaLivre'])->name('commande.deja_livre');
+    Route::post('/get-commande-livre-agent',[CommandeController::class,'getCommandeDejaLivre'])->name('commande.get_cmd_livre');
     //fin commande
 
 
