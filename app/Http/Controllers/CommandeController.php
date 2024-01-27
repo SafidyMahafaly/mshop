@@ -235,7 +235,7 @@ class CommandeController extends Controller
             $client_id = $client->id;
         }
         $commande->update([
-            'user_id'         => Auth::id(),
+            // 'user_id'         => Auth::id()
             'client_id'       => $client_id,
             'total'           => $request->somme,
             'source'          => $request->source,
