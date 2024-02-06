@@ -66,8 +66,8 @@
                                         </td>
                                         <td>{{$commande->user->name}}</td>
                                         <td>
-                                            <a href="/editCommande/{{$commande->id}}" class="btn btn-info btn-sm">Edit</a>
-                                            <a href="/deleteCommande/{{$commande->id}}" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="/editCommande/{{$commande->id}}" class="btn btn-info btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="/deleteCommande/{{$commande->id}}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
