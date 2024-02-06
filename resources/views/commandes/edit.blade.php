@@ -14,22 +14,22 @@
                             @csrf
                             <div class="row">
                                 <h4>Info client</h4>
-                                <div class="col-md-6 mb-1">
+                                <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Phone</label>
                                     <input type="tel" value="{{$commande->client->phone}}" class="form-control dt-full-name" autocomplete="off" placeholder="0345092565" id="phone" name="phone" required/>
                                     <input type="hidden"  name="client_id" id="client_id" value="{{$commande->client->id}}" class="client_id">
                                     <input type="hidden" name="somme" id="somme" value="{{$commande->total}}">
                                     <div id="client_suggerer"></div>
                                 </div>
-                                <div class="col-md-6 mb-1">
+                                <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Nom du client</label>
                                     <input type="text"  value="{{$commande->client->name}}" class="form-control dt-full-name" id="name" placeholder="ex : Safidy Mahafaly " name="name_client" required/>
                                 </div>
-                                <div class="col-md-6 mb-1">
+                                {{-- <div class="col-md-6 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Nom fb</label>
                                     <input type="text" value="{{$commande->client->fb_name}}" class="form-control dt-full-name" id="fb_name" placeholder="ex : Safidy Mahafaly " name="fb_name" />
-                                </div>
-                                <div class="col-md-6 mb-1">
+                                </div> --}}
+                                <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Adresse</label>
                                     <input type="tel" value="{{$commande->client->adress}}" class="form-control dt-full-name" id="adress" placeholder="ex : Ikinaja Ambohimangakely " name="adress" required/>
                                 </div>

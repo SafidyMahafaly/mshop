@@ -62,6 +62,9 @@ $(function () {
                                     '<a href="' + editClient + '" class="dropdown-item">' +
                                         feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
                                     'edit</a>' +
+                                    '<a href="' + destroyClient + '" class="dropdown-item">' +
+                                        feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
+                                    'Delete</a>' +
                                 '</div>' +
                             '</div>'
                       );

@@ -28,22 +28,22 @@
                             @csrf
                             <div class="row">
                                 <h4>Info client</h4>
-                                <div class="col-md-6 mb-1">
+                                <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Phone</label>
                                     <input type="tel" value="" class="form-control dt-full-name" autocomplete="off" placeholder="0345092565" id="phone" name="phone" required/>
                                     <input type="hidden" name="client_id" id="client_id" class="client_id">
                                     <input type="hidden" name="somme" id="somme">
                                     <div id="client_suggerer"></div>
                                 </div>
-                                <div class="col-md-6 mb-1">
+                                <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Nom du client</label>
                                     <input type="text" value="" class="form-control dt-full-name" id="name" placeholder="ex : Safidy Mahafaly " name="name_client" />
                                 </div>
-                                <div class="col-md-6 mb-1">
+                                {{-- <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Nom fb</label>
                                     <input type="text" value="" class="form-control dt-full-name" id="fb_name" placeholder="ex : Safidy Mahafaly " name="fb_name" required/>
-                                </div>
-                                <div class="col-md-6 mb-1">
+                                </div> --}}
+                                <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Adresse</label>
                                     <input type="tel" value="" class="form-control dt-full-name" id="adress" placeholder="ex : Ikinaja Ambohimangakely " name="adress" required/>
                                 </div>
@@ -113,16 +113,23 @@
                                     <label class="form-label" for="basic-icon-default-fullname">Remarque</label>
                                     <input type="text" name="remarque" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Aterina eo am arret fin 194"  />
                                 </div>
-                                <div class="col-md-3 mb-1">
+                                <div class="col-md-2 mb-1">
                                     <label class="form-label"  for="basic-icon-default-fullname">Statue du Payement</label>
                                     <select id="country" name="paye" class="form-select">
                                         <option value="0">Non payé</option>
                                         <option value="1">Payé</option>
                                     </select>
                                 </div>
-                                <div class="col-md-3 mb-1">
+                                <div class="col-md-2 mb-1">
                                     <label class="form-label"  for="basic-icon-default-fullname">A livrer</label>
-                                    <select id="country" class="form-select a_livrer">
+                                    <select id="country_ttt" class="form-select a_livrer">
+                                        <option value="0">Non</option>
+                                        <option value="1">Oui</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-1">
+                                    <label class="form-label"  for="basic-icon-default-fullname">Colis</label>
+                                    <select id="country_ttt" class="form-select">
                                         <option value="0">Non</option>
                                         <option value="1">Oui</option>
                                     </select>

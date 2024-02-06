@@ -36,9 +36,9 @@
                             <table class="commande-deja-livre table table-hover">
                                 <thead>
                                   <tr>
-                                    <th  style="width: 100px">Lieux</th>
+                                    <th  >Lieux</th>
                                     <th>Nom du client</th>
-                                    <th style="width: 150px">Produit</th>
+                                    <th >Produit</th>
                                     <th style="width: 10px">QT</th>
                                     <th>Total</th>
                                   </tr>
@@ -59,7 +59,7 @@
                                                         {{ $detail->quantity }} <br>
                                                     @endforeach
                                                 </td>
-                                                <td>{{ $commande->total }}</td>
+                                                <td>{{ $commande->total }} Ar</td>
                                             </tr>
                                         @endforeach
                                     @else
@@ -77,7 +77,7 @@
                                                         {{ $detail->quantity }} <br>
                                                     @endforeach
                                                 </td>
-                                                <td>{{ $commande->total }}</td>
+                                                <td>{{ $commande->total }} Ar</td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -89,5 +89,8 @@
             </section>
         </div>
     </div>
+    @push('scripts-bottom')
+        <script src="{{asset('app-assets/js/scripts/pages/app-livrer.js')}}"></script>
+    @endpush
 </x-app-layout>
 

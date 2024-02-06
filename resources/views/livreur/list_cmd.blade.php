@@ -4,7 +4,10 @@
             <section class="app-user-list">
                 <div class="card">
                     <div class="card-body border-bottom">
-                        <h4 class="card-title">Liste livraison & Filter</h4>
+                        <h4 class="card-title">Liste livraison  {{$livreur->name}}</h4>
+                        <h4 class="card-title">Compte : {{$sommeCommandesStatut3}} Ar</h4>
+                        <input type="hidden" value="{{$livreur->name}}" id="name_liv">
+                        <input type="hidden" value="{{count($commandes)}}" id="compteur">
                     </div>
                     <div class="col-md-2 p-2">
                         <label class="form-label" for="basic-icon-default-fullname">Filtre par date :</label>
@@ -18,14 +21,15 @@
                                     <th>
                                         <input type="checkbox" id="selectAll">
                                     </th>
+                                    <th>Lieu</th>
                                     <th>Nom du client</th>
                                     <th>Téléphone</th>
                                     <th>Produit</th>
                                     <th style="display: none">Produit</th>
                                     <th>Quantité</th>
                                     <th>Total</th>
-                                    <th>Lieu</th>
                                     <th>Statut</th>
+                                    <th>Cree par</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,6 +38,7 @@
                                         <td>
                                             <input type="checkbox" data-id="{{$com->commande->id}}" class="select-commande">
                                         </td>
+                                        <td>{{$com->commande->lieu_livraison}}</td>
                                         <td>{{$com->commande->client->name}}</td>
                                         <td>{{$com->commande->client->phone}}</td>
                                         <td>
@@ -55,8 +60,13 @@
                                             {{ implode(' + ', $produitNames) }}
                                         </td>
                                         <td>1</td>
-                                        <td>{{$com->commande->total}} Ar</td>
-                                        <td>{{$com->commande->lieu_livraison}}</td>
+                                        <td>
+                                            @if($com->commande->payer == 1)
+                                                - Payer
+                                            @else
+                                                - {{$com->commande->total}} Ar
+                                            @endif
+                                        </td>
                                         <td>
                                             @if($com->commande->status == '2')
                                                 <span class="badge bg-info">à livre</span>
@@ -68,6 +78,7 @@
                                                 <span class="badge bg-secondary">Reporter</span>
                                             @endif
                                         </td>
+                                        <td>{{$com->commande->user->name}}</td>
 
                                     </tr>
                                 @endforeach
@@ -77,10 +88,11 @@
                     </div>
                     <div class="row p-1" style="margin-top:-25px" id="exportButton">
                         <div class="col-6" style="margin-left: 10px">
-                            <button  data-bs-toggle="modal" data-bs-target="#livraisonLivre"  class="btn btn-primary mt-2 livraison" ><i class="fa-solid fa-motorcycle"></i>&nbsp;Livré</button>
-                            <button id="" data-bs-toggle="modal" data-bs-target="#livraisonAnnule" class="btn btn-dark mt-2 livraison"><i class="fa-solid fa-ban"></i>&nbsp;Annuler</button>
-                            <button id="" data-bs-toggle="modal" data-bs-target="#livraisonReporter" class="btn btn-info mt-2 livraison" id="livraison"><i class="fa-regular fa-calendar-check"></i>&nbsp;Reporter</button>
-                            <button id="" data-bs-toggle="modal" data-bs-target="#changement" class="btn btn-secondary mt-2 livraison" id="livraison"><i class="fa-regular fa-calendar-check"></i>&nbsp;livreur</button>
+                            <button  data-bs-toggle="modal" data-bs-target="#livraisonLivre"  class="btn btn-primary  mt-2 livraison" ><i class="fa-solid fa-motorcycle"></i>&nbsp;Livré</button>
+                            <button id="" data-bs-toggle="modal" data-bs-target="#livraisonAnnule" class="btn btn-dark mt-2  livraison"><i class="fa-solid fa-ban"></i>&nbsp;Annuler</button>
+                            <button id="" data-bs-toggle="modal" data-bs-target="#livraisonReporter" class="btn btn-info mt-2  livraison" id="livraison"><i class="fa-regular fa-calendar-check"></i>&nbsp;Reporter</button>
+                            <button id="" data-bs-toggle="modal" data-bs-target="#changement" class="btn btn-secondary mt-2 livraison "  id="livraison"><i class="fa-regular fa-calendar-check"></i>&nbsp;Livreur</button>
+                            <button  class="btn btn-warning mt-2 pdf"  id="livraison"><i class="fa-regular fa-calendar-check"></i>&nbsp;PDF</button>
                             {{-- <button id="" class="btn btn-danger mt-2"><i class="fa-solid fa-trash"></i>&nbsp;Supprimer</button>
                             <button id="" class="btn btn-success mt-2"><i class="fa-solid fa-cart-shopping"></i>&nbsp;Payement</button> --}}
                         </div>

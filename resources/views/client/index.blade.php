@@ -6,6 +6,15 @@
                 <div class="card">
                     <div class="card-body border-bottom">
                         <h4 class="card-title">Liste des clients</h4>
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="card-datatable table-responsive pt-0">
                         <table class="client-list-table table">

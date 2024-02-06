@@ -39,6 +39,10 @@ class Commande extends Model
     {
         return $this->hasMany(Commande_detail::class);
     }
+    public function livreur()
+    {
+        return $this->hasOne(Livreur_commande::class);
+    }
 
     public function produits()
     {

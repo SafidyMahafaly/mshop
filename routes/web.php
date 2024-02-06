@@ -102,7 +102,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/getLivreur',[LivreurController::class,'getLivreur']);
     Route::post('/livreurSave',[LivreurController::class,'store'])->name('livreur.store');
     Route::get('/voirCommande/{id}/{date?}',[LivreurController::class,'voir_commande']);
-    Route::get('/genererPDF/{id}/{date}',[LivreurController::class,'genererPDF']);
+    // Route::get('/genererPDF/{id}/{date}/{com}',[LivreurController::class,'genererPDF']);
+    Route::get('/genererPDF',[LivreurController::class,'genererPDF']);
     Route::get('/changeStatusLivre',[LivreurController::class,'changeStatus']);
     Route::get('/changeStatusLivreur',[LivreurController::class,'changeStatusLivreur']);
     Route::get('/changeStatusAnnuler',[LivreurController::class,'changeStatusAnnuler']);

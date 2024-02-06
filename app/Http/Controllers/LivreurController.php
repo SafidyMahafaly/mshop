@@ -11,8 +11,10 @@ use Barryvdh\DomPDF\PDF;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Livreur_commande;
+use Illuminate\Support\Facades\Response;
 use App\Http\Requests\StoreLivreurRequest;
 use App\Http\Requests\UpdateLivreurRequest;
+use App\Models\Produit;
 
 class LivreurController extends Controller
 {
@@ -37,21 +39,34 @@ class LivreurController extends Controller
             $query = Livreur_commande::with('commande.details', 'commande.client', 'commande.user', 'commande.details.produit', 'commande.details.produit.categorie')
                 ->where('livreur_id', $id);
 
+
             // Si une date est fournie, filtrer par cette date
             if ($date) {
                 $query->whereDate('created_at', $date);
             } else {
                 // Sinon, filtrer par la date d'aujourd'hui
-                $query->whereDate('created_at', Carbon::today());
+                $query->whereDate('created_at', Carbon::tomorrow());
             }
             $commandes = $query->get();
+            $commandeIds = [];
+
+            foreach ($commandes as $livreurCommande) {
+                $commandeIds[] = $livreurCommande->commande_id;
+            }
+            $sommeCommandesStatut3 = Commande::whereIn('id', $commandeIds)
+                                    ->where('status', 3)
+                                    // ->where('payer', 1)
+                                    ->where('mode_payement','espece')
+                                    ->sum('total');
+
+
             if($date){
                 $date = is_string($date) ? \Carbon\Carbon::parse($date) : $date;
             }else{
-                $date = Carbon::today();;
+                $date = Carbon::tomorrow();
             }
             $livreurs = Livreur::all();
-            return view('livreur.list_cmd', compact('commandes', 'livreur','date','id','livreurs'));
+            return view('livreur.list_cmd', compact('commandes', 'livreur','date','id','livreurs','sommeCommandesStatut3'));
         }
     }
 
@@ -80,14 +95,25 @@ class LivreurController extends Controller
 
     public function changeStatusAnnuler(StoreLivreurRequest $request)
     {
-        $commande = Commande::whereIn('id',$request->id)->get();
-        foreach($commande as $com){
-            Client::where('id',$com->client_id)->update(['remarque' => $request->remarque]);
+        $commandes = Commande::whereIn('id', $request->id)->with('details.produit')->get();
+
+        foreach ($commandes as $commande) {
+            foreach ($commande->details as $detail) {
+                // Mettre à jour l'unité du produit
+                $nouvelleUnite = $detail->produit->unity + $detail->quantity;
+
+                // Mettre à jour l'unité du produit dans la table des produits
+                $detail->produit->update(['unity' => $nouvelleUnite]);
+            }
         }
-        Commande::whereIn('id',$request->id)->update([
+
+        // Mettre à jour le statut de la commande et le champ payer
+        Commande::whereIn('id', $request->id)->update([
             'status' => '4',
             'payer' => '0'
         ]);
+        // Mettre à jour la remarque du client
+        Client::whereIn('id', $commandes->pluck('client_id'))->update(['remarque' => $request->remarque]);
         return response()->json();
     }
 
@@ -108,29 +134,40 @@ class LivreurController extends Controller
     }
 
 
-    public function genererPDF($id,$date){
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
+    public function genererPDF(StoreLivreurRequest $request){
+         // Définir les options de Dompdf
+         if (!is_array($request->commande)) {
+            // Convertir en tableau si ce n'est pas déjà le cas
+            $commandes = explode(',', $request->commande);
+        } else {
+            $commandes = $request->commande;
+        }
+        // dd($commandes)
+         $options = new Options();
+         $options->set('isHtml5ParserEnabled', true);
 
-        // Créez une instance de Dompdf avec les options
-        $dompdf = new Dompdf($options);
+         // Créer une instance de Dompdf avec les options
+         $dompdf = new Dompdf($options);
 
-        $commandes = Livreur_commande::with('commande.details', 'commande.client', 'commande.user','commande.details.produit','commande.details.produit.categorie')
-            ->where('livreur_id', $id)
-            ->whereDate('created_at', $date)
-            ->get();
+         // Récupérer les données nécessaires pour générer le PDF
+         $commandes = Livreur_commande::with('commande.details', 'commande.client', 'commande.user', 'commande.details.produit', 'commande.details.produit.categorie')
+             ->where('livreur_id', $request->livreur_id)
+             ->whereIn('commande_id', $commandes)
+             ->get();
+        $livreur = Livreur::find($request->livreur_id);
 
+         // Charger la vue PDF avec les données récupérées
+         $pdf = app('dompdf.wrapper');
+         $livraison_pdf = $pdf->loadView('livreur.pdf', compact('commandes','livreur'));
 
-        // dd($commandes);
-        // Utilisez l'injection de dépendances pour obtenir une instance de la classe PDF
-        // return view('livreur.pdf', compact('commandes'));
+         // Récupérer les données binaires du PDF
+         $pdfContent = $livraison_pdf->output();
 
-        $pdf = app('dompdf.wrapper');
-
-        // Utilisez la méthode loadView sur l'instance de la classe PDF
-        $livraison_pdf = $pdf->loadView('livreur.pdf', compact('commandes'));
-
-        return $livraison_pdf->stream('livreur.pdf');
+         // Retourner les données binaires du PDF dans la réponse avec le bon type de contenu
+         return Response::make($pdfContent, 200, [
+             'Content-Type' => 'application/pdf',
+             'Content-Disposition' => 'inline; filename="livreur.pdf"'
+         ]);
     }
 
     /**

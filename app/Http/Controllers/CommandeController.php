@@ -26,45 +26,51 @@ class CommandeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($date = null)
     {
+        if($date){
+            $aujourdhui = $date;
+        }else{
+            $aujourdhui = Carbon::tomorrow()->toDateString();
+        }
         $livreurs = Livreur::all();
-        // $commandes = Commande::with('client','user','details')->get();
-        return view('commandes.index',compact('livreurs'));
+        $commandes = Commande::orderBy('created_at', 'asc')->whereDate('created_at',$aujourdhui)->with('client','user','details','livreur')->get();
+        // dd($commandes);
+        return view('commandes.index',compact('livreurs','commandes','aujourdhui'));
     }
 
     public function getCommande(Request $request)
     {
        // Récupérer l'utilisateur actuel
         // Récupérer l'utilisateur actuel
-    $user = Auth::user();
+        $user = Auth::user();
 
-    // Récupérer la date de la requête
-    $date = $request->input('date');
+        // Récupérer la date de la requête
+        $date = $request->input('date');
 
-    // Construire la requête en fonction de la date
-    $query = Commande::with('client', 'user', 'details.produit')->where('status','!=','6');
+        // Construire la requête en fonction de la date
+        $query = Commande::with('client', 'user', 'details.produit')->where('status','!=','6');
 
-    if ($user->hasRole('agent')) {
-        // Si l'utilisateur a le rôle 'agent', filtrez les commandes par son ID d'utilisateur
-        $query->where('user_id', $user->id);
-    }
+        if ($user->hasRole('agent')) {
+            // Si l'utilisateur a le rôle 'agent', filtrez les commandes par son ID d'utilisateur
+            $query->where('user_id', $user->id);
+        }
 
-    if ($date) {
-        $query->whereDate('created_at', $date);
-    } else {
-        // Si aucune date n'est spécifiée, afficher uniquement les commandes créées aujourd'hui
-        $query->whereDate('created_at', Carbon::today());
-        $query->where(function ($query) {
-            $query->where('status', '=', '1')
-                ->orWhere('status', '=', '5');
-        });
-    }
+        if ($date) {
+            $query->whereDate('created_at', $date);
+        } else {
+            // Si aucune date n'est spécifiée, afficher uniquement les commandes créées aujourd'hui
+            $query->whereDate('created_at', Carbon::today());
+            $query->where(function ($query) {
+                $query->where('status', '=', '1')
+                    ->orWhere('status', '=', '5');
+            });
+        }
 
-    // Exécutez la requête et récupérez les commandes
-    $commandes = $query->get();
+        // Exécutez la requête et récupérez les commandes
+        $commandes = $query->get();
 
-    return response()->json($commandes);
+        return response()->json($commandes);
     }
 
     /**
@@ -72,7 +78,7 @@ class CommandeController extends Controller
      */
     public function create()
     {
-        $aujourdhui = Carbon::now()->toDateString();
+        $aujourdhui = Carbon::tomorrow()->toDateString();
         return view('commandes.create',compact('aujourdhui'));
     }
 

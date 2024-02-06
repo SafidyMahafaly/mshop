@@ -19,4 +19,9 @@ class Livreur_commande extends Model
     {
         return $this->belongsTo(Commande::class);
     }
+    public function livreur()
+    {
+        return $this->belongsTo(Livreur::class);
+    }
+
 }

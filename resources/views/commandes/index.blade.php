@@ -7,15 +7,14 @@
                     <div class="card-body border-bottom">
                         <h4 class="card-title">Liste commande & Filter</h4>
                         <div class="col-2">
-                            <input type="date" class="form-control" id="customDateInput">
+                            <input type="date" class="form-control" value="{{$aujourdhui}}" id="teste_ma">
                         </div>
                     </div>
                     <div class="card-datatable table-responsive pt-0">
                         <table class="user-commande-table table">
                             <thead class="table-light">
                                 <tr>
-                                    <th></th>
-                                    <th></th>
+                                    <th><input type="checkbox" id="selectAll"></th>
                                     <th  style="width: 150px">Lieux</th>
                                     <th>Nom du client</th>
                                     <th style="width: 150px">Produit</th>
@@ -28,8 +27,53 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-
+                            <tbody>
+                                @foreach ($commandes as $commande)
+                                    <tr>
+                                        <td><input type="checkbox" data-id="{{$commande->id}}" class="select-commande"></td>
+                                        <td>{{$commande->lieu_livraison}}</td>
+                                        <td>{{$commande->client->name }}</td>
+                                        <td>
+                                            @foreach ($commande->details as $det)
+                                            - {{$det->produit->name}} <br>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($commande->details as $det)
+                                            - {{$det->quantity}} <br>
+                                            @endforeach
+                                        </td>
+                                        <td>{{$commande->total}} Ar</td>
+                                        <td>
+                                            @if($commande->status == 1)
+                                                <span class="badge bg-warning">en attente</span>
+                                            @elseif ($commande->status == 2)
+                                                <span class="badge bg-info">Assigner  {{$commande->livreur->livreur->name}}</span>
+                                            @elseif ($commande->status == 3)
+                                                <span class="badge bg-success">Livré</span>
+                                            @elseif ($commande->status == 4)
+                                                <span class="badge bg-dark">Annuler</span>
+                                            @elseif ($commande->status == 5)
+                                                <span class="badge bg-secondary">Reporter</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($commande->payer == 1)
+                                                <span class="badge bg-success">Payé</span>
+                                            @else
+                                                <span class="badge bg-danger">Non Payé</span>
+                                            @endif
+                                        </td>
+                                        <td>{{$commande->user->name}}</td>
+                                        <td>
+                                            <a href="/editCommande/{{$commande->id}}" class="btn btn-info btn-sm">Edit</a>
+                                            <a href="/deleteCommande/{{$commande->id}}" class="btn btn-danger btn-sm">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
+
 
                     </div>
                     <div class="row p-1" style="margin-top:-25px" id="exportButton">

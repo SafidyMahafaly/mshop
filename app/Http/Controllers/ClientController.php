@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Commande;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
-use App\Models\Client;
-use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
@@ -77,14 +78,12 @@ class ClientController extends Controller
      */
     public function destroy($id) //(Client $client)
     {
-        try {
-            $client = Client::findOrFail($id);
-            toastr($client.' est bien supprimer');
-            $client->delete();
-
-        } catch (\Throwable $th) {
-            toastr()->error('Ce client n\'existe pas!');
+        $client = Client::findOrFail($id);
+        $com = Commande::where('client_id',$client->id)->first();
+        if($com){
+            return back()->withErrors(['message' => 'Impossible de supprimer ce client car il est associé à une commande.']);
         }
+        $client->delete();
         return redirect()->route('client.index');
     }
 

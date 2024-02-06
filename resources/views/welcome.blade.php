@@ -57,7 +57,7 @@ a img.icon {
 
 
     <div class="links">
-        <a href="" target="_blank">Prod by S.M<img class="icon" src="https://ksenia-k.com/img/icons/link.svg"></a>
+        <a href="https://www.facebook.com/profile.php?id=100068877439480" target="_blank">Prod by S.M<img class="icon" src="https://ksenia-k.com/img/icons/link.svg"></a>
     </div>
     <script>
         const canvas = document.querySelector("canvas");

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Client;
 use App\Models\Commande;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class DashboardControlleur extends Controller
         // Compter les commandes dans la plage de dates
         $nombreDeCommandes = Commande::whereBetween('created_at', [$ilYa7Jours, $mety])->count();
         $client = Client::count();
-        $commande = Commande::whereDate('created_at', Carbon::today())->count();
+        $commande = Commande::whereDate('created_at', Carbon::tomorrow())->count();
 
         $commandesLivre = Commande::whereBetween('created_at', [$ilYa7Jours, $mety])
             ->where('status', 3) // Assurez-vous que 'status' est le bon nom de colonne
@@ -52,7 +53,18 @@ class DashboardControlleur extends Controller
         }
         // Calcul du pourcentage
         $pourcentageLivre = round(($commandesLivre / $div) * 100);
+        $moisEnCours = Carbon::now()->month;
 
-        return view('dashboard',compact('client','commande','nombreDeCommandes','pourcentageLivre','commandesEnAttente','commandesLivre','commandesAnnule'));
+    // Récupérer les utilisateurs de type 'agent'
+    $listeAgents = User::whereHas('roles', function($query) {
+        $query->where('name', 'agent');
+    })->withCount(['commandes' => function($query) use ($moisEnCours) {
+        // Filtrer les commandes créées ce mois-ci avec le statut 3
+        $query->whereMonth('created_at', $moisEnCours)
+            ->where('status', 3);
+    }])->get();
+        // dd($listeAgents);
+
+        return view('dashboard',compact('client','commande','nombreDeCommandes','pourcentageLivre','commandesEnAttente','commandesLivre','commandesAnnule','listeAgents'));
     }
 }

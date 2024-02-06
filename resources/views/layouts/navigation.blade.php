@@ -265,7 +265,7 @@
                 <li class=" nav-item {{ Route::is(['client.*']) ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('client.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Client</span></a>
 
                 <li class=" nav-item {{ Str::startsWith(request()->path(), 'magasinier') || Str::startsWith(request()->path(), 'detail_produit') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('magasinier.index')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Magasinier</span></a></li>
-                <li class=" nav-item {{ Str::startsWith(request()->path(), '') || Str::startsWith(request()->path(), '') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.deja_livre')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande livré</span></a></li>
+                <li class=" nav-item {{ Str::startsWith(request()->path(), 'liste-commande-livre-agent') || Str::startsWith(request()->path(), '') ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('commande.deja_livre')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Email">Commande livré</span></a></li>
             </ul>
             @endrole
             @role('Magasinier')

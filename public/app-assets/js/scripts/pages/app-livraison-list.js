@@ -11,16 +11,37 @@ $(function () {
 ('use strict');
 $('#selectAll').change(function () {
     $('.select-commande').prop('checked', $(this).prop('checked'));
+    updateExportButton();
+
 });
 
 // Gestion de la sélection/désélection individuelle des cases à cocher
 $('.select-commande').change(function () {
+    updateExportButton();
     if ($('.select-commande:checked').length === $('.select-commande').length) {
         $('#selectAll').prop('checked', true);
     } else {
         $('#selectAll').prop('checked', false);
     }
 });
+
+$('#exportButton').hide();
+
+
+function updateExportButton() {
+    var selectedCheckboxes = $('.select-commande:checked');
+    if (selectedCheckboxes.length > 0) {
+        // Affichez le bouton Export lorsque des cases sont sélectionnées
+        $('#exportButton').show();
+    } else {
+        // Masquez le bouton Export lorsque aucune case n'est sélectionnée
+        $('#exportButton').hide();
+    }
+}
+
+
+
+
 $('#filter_date').on('change',function(){
     var livreur = $('#livreur_id').val()
     var date = $(this).val();
@@ -105,27 +126,32 @@ $('#changementLiv').on('click', function () {
 });
 $('#livree').on('click', function () {
     var checkedCheckboxes = $('.select-commande:checked');
-
     if (checkedCheckboxes.length > 0) {
-        var checkedIds = checkedCheckboxes.map(function () {
-            return $(this).data('id');
-        }).get();
-        var remarque = $('#remarque_livre').val();
         var mode = $('#mode_payement').val();
-        // alert(mode)
-        $.ajax({
-            type: "GET",
-            url: "/changeStatusLivre",
-            data: {
-                id : checkedIds,
-                remarque : remarque,
-                mode : mode
-            },
-            dataType: "json",
-            success: function (response) {
-                location.reload();
-            }
-        });
+        if(mode){
+            var checkedIds = checkedCheckboxes.map(function () {
+                return $(this).data('id');
+            }).get();
+            var remarque = $('#remarque_livre').val();
+            var mode = $('#mode_payement').val();
+            // alert(mode)
+            $.ajax({
+                type: "GET",
+                url: "/changeStatusLivre",
+                data: {
+                    id : checkedIds,
+                    remarque : remarque,
+                    mode : mode
+                },
+                dataType: "json",
+                success: function (response) {
+                    location.reload();
+                }
+            });
+        }else{
+            alert("Veuillez sélectionner le mode de payement.");
+        }
+
     } else {
         alert("Veuillez sélectionner au moins une commande.");
     }
@@ -133,8 +159,8 @@ $('#livree').on('click', function () {
 var dtUserTable = $('.user-cmd-table')
 if (dtUserTable.length) {
     var date = $('#filter_date').val();
-    var livreur = $('#livreur_id').val();
-
+    var livreur = $('#name_liv').val();
+    var compteur = $('#compteur').val();
     dtUserTable.DataTable({
         order: [[1, 'desc']],
         paging: false,
@@ -163,40 +189,12 @@ if (dtUserTable.length) {
                 text: feather.icons['external-link'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
                 buttons: [
                     {
-                        extend: 'print',
-                        text: feather.icons['printer'].toSvg({ class: 'font-small-4 me-50' }) + 'Print',
-                        title: 'Liste livraisons',
-                        exportOptions: { columns: [1,3,4,5] }
-                    },
-                    {
-                        extend: 'csv',
-                        text: feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) + 'Csv',
-                        className: 'dropdown-item',
-                        title: 'Liste livraisons',
-                        exportOptions: { columns: [1,2,4,6] }
-                    },
-                    {
                         extend: 'excel',
                         text: feather.icons['file'].toSvg({ class: 'font-small-4 me-50' }) + 'Excel',
                         className: 'dropdown-item',
-                        title: 'Liste livraisons',
-                        exportOptions: { columns: [1,2,4,5,6,7] }
+                        title: ' Liste livraisons - Date : ' + date + ' - Livreur : ' + livreur + ' - Nbr : ' + compteur,
+                        exportOptions: { columns: [1,2,5,6,7] }
                     },
-                    {
-                        extend: 'pdf',
-                        text: feather.icons['clipboard'].toSvg({ class: 'font-small-4 me-50' }) + 'Pdf',
-                        className: 'dropdown-item',
-                        action: function (e, dt, button, config) {
-                            // Redirigez l'utilisateur vers votre lien lors du clic sur le bouton PDF
-                            window.location.href = '/genererPDF/'+ livreur + '/' + date; // Remplacez 'votre_lien' par le lien souhaité
-                        }
-                    },
-                    {
-                        extend: 'copy',
-                        text: feather.icons['copy'].toSvg({ class: 'font-small-4 me-50' }) + 'Copy',
-                        className: 'dropdown-item',
-                        exportOptions: { columns: [1,2] }
-                    }
 
                 ],
                 init: function (api, node, config) {
@@ -211,5 +209,26 @@ if (dtUserTable.length) {
     });
 
 }
+
+
+function getSelectedIds() {
+    var selectedIds = [];
+    $('.select-commande:checked').each(function() {
+        var id = $(this).attr('data-id');
+        selectedIds.push(id);
+    });
+    var livreur = $('#livreur_id').val();
+    var pdfUrl = '/genererPDF?commande=' + selectedIds.join(',') + '&livreur_id=' + livreur;
+    window.location.href = pdfUrl;
+
+}
+
+$('#exportButton .pdf').on('click',function(){
+    // alert('test')
+     getSelectedIds();
+})
+
+
+
 
 });

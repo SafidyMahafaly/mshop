@@ -82,24 +82,21 @@
                     <!-- Avg Sessions Chart Card starts -->
                     <section id="chartjs-chart">
                         <div class="row">
-                            <div class="col-xl-6 col-12">
+                            <div class="col-lg-6 col-12">
                                 <div class="card">
-                                    <div class="card-header d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
-                                        <div class="header-left">
-                                            <p class="card-subtitle text-muted mb-25">Benefice Journalier</p>
-                                            <h4 class="card-title">74,123 Ar</h4>
-                                        </div>
-                                        {{-- <div class="header-right d-flex align-items-center mt-sm-0 mt-1">
-                                            <i data-feather="calendar"></i>
-                                            <input type="text" class="form-control flat-picker border-0 shadow-none bg-transparent pe-0" placeholder="YYYY-MM-DD" />
-                                        </div> --}}
+                                    <div class="card-header d-flex justify-content-between pb-0">
+                                        <h4 class="card-title">Compte commande agent mensuele</h4>
+
                                     </div>
                                     <div class="card-body">
-                                        <canvas class="horizontal-bar-chart-ex chartjs" data-height="400"></canvas>
+                                        @foreach ($listeAgents as $agent)
+                                            <hr>
+                                            <p>{{$agent->name}} : {{$agent->commandes_count}}</p> <hr>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-12">
+                            {{-- <div class="col-lg-6 col-12">
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between pb-0">
                                         <h4 class="card-title">Historique commande</h4>
@@ -141,7 +138,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </section>
                     <!-- Avg Sessions Chart Card ends -->
