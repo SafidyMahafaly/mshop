@@ -1,9 +1,9 @@
 <x-app-layout>
     <style>
-        /* .colis{
-            background: #8f87ec !important;
+        .colis{
+            background: #7367f0 !important;
             color: white;
-        } */
+        }
     </style>
     <div class="py-12">
         <div class="">
@@ -11,7 +11,7 @@
 
                 <div class="card">
                     <div class="card-body border-bottom">
-                        <h4 class="card-title">Liste commande & Filter</h4>
+                        <h4 class="card-title">Liste Colis</h4>
                         <div class="col-2">
                             <input type="date" class="form-control" value="{{$aujourdhui}}" id="teste_ma">
                         </div>
@@ -29,13 +29,15 @@
                                     <th>Total</th>
                                     <th style="width: 70px">Statut</th>
                                     <th>Payé</th>
-                                    <th>Crée par</th>
+                                    <th>Réference</th>
+                                    <th>Ticket</th>
+                                    <th>Crée</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($commandes as $commande)
-                                    <tr @if($commande->colis == 1) class="colis" @endif >
+                                    <tr>
                                         <td><input type="checkbox" data-id="{{$commande->id}}" class="select-commande" @if($commande->status == 2) disabled @endif></td>
                                         <td>{{$commande->lieu_livraison}}</td>
                                         <td>{{$commande->client->name }}</td>
@@ -70,6 +72,8 @@
                                                 <span class="badge bg-danger">Non Payé</span>
                                             @endif
                                         </td>
+                                        <td>{{$commande->reference ? $commande->reference : 'NaN'}}</td>
+                                        <td><input type="checkbox" data-id="{{$commande->id}}" class="ticket" @if($commande->Ticket == 1) checked @endif></td>
                                         <td>{{$commande->user->name}}</td>
                                         <td>
                                             <a href="/editCommande/{{$commande->id}}" class="btn btn-info btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -126,6 +130,6 @@
         </div>
     </div>
     @push('scripts-bottom')
-        <script src="{{asset('app-assets/js/scripts/pages/app-commande-list.js')}}"></script>
+        <script src="{{asset('app-assets/js/scripts/pages/app-colis-list.js')}}"></script>
     @endpush
 </x-app-layout>

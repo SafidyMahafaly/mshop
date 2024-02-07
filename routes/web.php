@@ -113,6 +113,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/deleteLivreur/{id}', [LivreurController::class,'destroy'])->name('livreur.destroy');
     //fin livreur
 
+    //route colis
+    Route::get('/colis/{date?}',[CommandeController::class,'colis'])->name('colis.index');
+    Route::get('/ticket',[CommandeController::class,'ticket']);
+    //fin route colis
+
     /*** route client */
     Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     Route::post('/saveclient',[ ClientController::class, 'store'])->name('client.store');

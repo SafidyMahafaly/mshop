@@ -45,7 +45,7 @@
                                 </div> --}}
                                 <div class="col-md-4 mb-1">
                                     <label class="form-label" for="basic-icon-default-fullname">Adresse</label>
-                                    <input type="tel" value="" class="form-control dt-full-name" id="adress" placeholder="ex : Ikinaja Ambohimangakely " name="adress" required/>
+                                    <input type="tel" value="" class="form-control dt-full-name" id="adress" placeholder="ex : Ikianja Ambohimangakely " name="adress" required/>
                                 </div>
                                 <p style="color: red;font-size:15px;margin-left:7px" id="remarque_client"></p>
                             </div>
@@ -95,7 +95,7 @@
                             <hr>
                             <div class="row">
                                 <h4>Autre info</h4>
-                                <div class="col-md-3 mb-1">
+                                <div class="col-md-2 mb-1">
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-contact">Source</label>
                                         <select id="country" name="source" class="form-select">
@@ -109,16 +109,24 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb-1">
-                                    <label class="form-label" for="basic-icon-default-fullname">Remarque</label>
-                                    <input type="text" name="remarque" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Aterina eo am arret fin 194"  />
-                                </div>
+
                                 <div class="col-md-2 mb-1">
                                     <label class="form-label"  for="basic-icon-default-fullname">Statue du Payement</label>
                                     <select id="country" name="paye" class="form-select">
                                         <option value="0">Non payé</option>
                                         <option value="1">Payé</option>
                                     </select>
+                                </div>
+                                <div class="col-md-2 mb-1">
+                                    <label class="form-label"  for="basic-icon-default-fullname">Mode de Payement</label>
+                                    <select id="country" name="modeP" class="form-select">
+                                        <option value="Espece">Espece</option>
+                                        <option value="Mobile Money">Mobile Money</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-1">
+                                    <label class="form-label" for="basic-icon-default-fullname">Réference</label>
+                                    <input type="text" name="remarque" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="REF-0035-MV.010"  />
                                 </div>
                                 <div class="col-md-2 mb-1">
                                     <label class="form-label"  for="basic-icon-default-fullname">A livrer</label>
@@ -129,7 +137,7 @@
                                 </div>
                                 <div class="col-md-2 mb-1">
                                     <label class="form-label"  for="basic-icon-default-fullname">Colis</label>
-                                    <select id="country_ttt" class="form-select">
+                                    <select id="" name="colis" class="form-select">
                                         <option value="0">Non</option>
                                         <option value="1">Oui</option>
                                     </select>

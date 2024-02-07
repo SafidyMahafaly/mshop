@@ -74,7 +74,7 @@
                             <hr>
                             <div class="row">
                                 <h4>Autre info</h4>
-                                <div class="col-md-3 mb-1">
+                                <div class="col-md-2 mb-1">
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-contact">Source</label>
                                         <select id="country" name="source" class="form-select">
@@ -88,22 +88,37 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb-1">
-                                    <label class="form-label" for="basic-icon-default-fullname">Remarque</label>
-                                    <input type="text" value="{{$commande->remarque}}"  name="remarque" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Aterina eo am arret fin 194"  />
-                                </div>
-                                <div class="col-md-3 mb-1">
+
+                                <div class="col-md-2 mb-1">
                                     <label class="form-label"  for="basic-icon-default-fullname">Statue du Payement</label>
                                     <select id="country" name="paye" class="form-select">
                                         <option value="0" @if($commande->payer == '0') selected @endif>Non payé</option>
                                         <option value="1" @if($commande->payer == '1') selected @endif>Payé</option>
                                     </select>
                                 </div>
-                                <div class="col-md-3 mb-1">
+                                <div class="col-md-2 mb-1">
+                                    <label class="form-label"  for="basic-icon-default-fullname">Mode de Payement</label>
+                                    <select id="country" name="modeP" class="form-select">
+                                        <option value="0" @if($commande->mode_payement == 'Espece') selected @endif>Espece</option>
+                                        <option value="1" @if($commande->payer == 'Mobile Money') selected @endif>Mobile Money</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-1">
+                                    <label class="form-label" for="basic-icon-default-fullname">Reference</label>
+                                    <input type="text" value="{{$commande->reference}}"  name="remarque" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Aterina eo am arret fin 194"  />
+                                </div>
+                                <div class="col-md-2 mb-1">
                                     <label class="form-label"  for="basic-icon-default-fullname">A livrer</label>
                                     <select id="country" class="form-select a_livrer">
                                         <option value="0" @if(!$commande->lieu_livraison) selected @endif>Non</option>
                                         <option value="1" @if($commande->lieu_livraison) selected @endif>Oui</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-1">
+                                    <label class="form-label"  for="basic-icon-default-fullname">Colis</label>
+                                    <select id="country" name="colis" class="form-select">
+                                        <option value="0" @if($commande->colis == '0') selected @endif>Non</option>
+                                        <option value="1" @if($commande->colis == '1') selected @endif>Oui</option>
                                     </select>
                                 </div>
                             </div>

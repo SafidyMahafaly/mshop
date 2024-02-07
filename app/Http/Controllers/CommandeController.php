@@ -34,9 +34,21 @@ class CommandeController extends Controller
             $aujourdhui = Carbon::tomorrow()->toDateString();
         }
         $livreurs = Livreur::all();
-        $commandes = Commande::orderBy('created_at', 'asc')->whereDate('created_at',$aujourdhui)->with('client','user','details','livreur')->get();
+        $commandes = Commande::orderBy('id', 'desc')->whereDate('created_at',$aujourdhui)->with('client','user','details','livreur')->get();
         // dd($commandes);
         return view('commandes.index',compact('livreurs','commandes','aujourdhui'));
+    }
+    public function colis($date = null)
+    {
+        if($date){
+            $aujourdhui = $date;
+        }else{
+            $aujourdhui = Carbon::tomorrow()->toDateString();
+        }
+        $livreurs = Livreur::all();
+        $commandes = Commande::orderBy('id', 'desc')->where('colis',1)->whereDate('created_at',$aujourdhui)->with('client','user','details','livreur')->get();
+        // dd($commandes);
+        return view('commandes.indexColis',compact('livreurs','commandes','aujourdhui'));
     }
 
     public function getCommande(Request $request)
@@ -187,13 +199,15 @@ class CommandeController extends Controller
                 'total'           => $request->somme,
                 'status'          => 1,
                 'source'          => $request->source,
-                'remarque'        => $request->remarque,
+                'reference'        => $request->remarque,
                 'lieu_livraison'  => $lieu,
                 'date_livraison'  => $request->date_livraison,
                 'heure'           => $request->heure_livraison,
                 'frais_livraison' => $request->frais_livraison,
                 'payer'           => $request->paye,
-                'created_at'      => $date
+                'created_at'      => $date,
+                'colis'           => $request->colis,
+                'mode_payement'   => $request->modeP
             ]);
             $produit = $request->id_produit;
             $quatite = $request->quantite;
@@ -332,13 +346,16 @@ class CommandeController extends Controller
             'client_id'       => $client_id,
             'total'           => $request->somme,
             'source'          => $request->source,
-            'remarque'        => $request->remarque,
+            'reference'       => $request->remarque,
             'lieu_livraison'  => $request->lieux_livraison,
             'date_livraison'  => $request->date_livraison,
             'heure'           => $request->heure_livraison,
             'frais_livraison' => $request->frais_livraison,
             'payer'           => $request->paye,
-            'created_at'      => $request->date_livraison
+            'created_at'      => $request->date_livraison,
+            'colis'           => $request->colis,
+            'mode_payement'   => $request->modeP
+
         ]);
         Livreur_commande::where('commande_id',$id)->update(['created_at' => $request->date_livraison]);
         Commande_detail::where('commande_id',$id)->delete();
@@ -410,5 +427,14 @@ class CommandeController extends Controller
         $commandes = Commande::where('user_id',$request->user_id)->where('status',3)->whereRaw("MONTH(updated_at) = $mois AND YEAR(updated_at) = $annee")->with(['client','details.produit'])->get();
 
         return redirect()->route('commande.deja_livre')->with('commandes', $commandes);
+    }
+
+    public function ticket(Request $request)
+    {
+        $commande = Commande::findOrFail($request->id);
+        $commande->update([
+            'ticket' => !$commande->ticket
+        ]);
+        return response()->json();
     }
 }
