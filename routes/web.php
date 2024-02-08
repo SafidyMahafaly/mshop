@@ -25,7 +25,7 @@ use App\Http\Controllers\MagasinerControlleur;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard',[DashboardControlleur::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/utilisateur',[UserControlleur::class,'index'])->name('utilisateur.index');
     Route::get('/getUtilisateur',[UserControlleur::class,'getUtilisateur']);
     Route::post('/save_user',[UserControlleur::class,'store'])->name('utilisateur.store');
+    Route::get('/deleteUser/{id}',[UserControlleur::class,'destroy']);
+    Route::post('/userUpdate',[UserControlleur::class,'update'])->name('utilisateur.update');
     //fin utilisateur
 
 

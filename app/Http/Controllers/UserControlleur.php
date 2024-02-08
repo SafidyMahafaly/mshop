@@ -9,7 +9,9 @@ use Illuminate\Auth\Events\Registered;
 class UserControlleur extends Controller
 {
     public function index(){
-        return view('utilisateurs.index');
+        $users  = User::with('roles')->get();
+        // dd($users);
+        return view('utilisateurs.index',compact('users'));
     }
 
     public function getUtilisateur(Request $request){
@@ -32,5 +34,31 @@ class UserControlleur extends Controller
         $user->addRole($request->role);
         event(new Registered($user));
         return back();
+    }
+    public function destroy($id){
+        User::find($id)->delete();
+        return back();
+    }
+    public function update(Request $request)
+    {
+        $user = User::find($request->id);
+
+        // Mettez à jour les propriétés de l'utilisateur avec les données du formulaire
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        // Vérifiez si un nouveau mot de passe a été fourni
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        // Mettez à jour le rôle de l'utilisateur
+        $user->syncRoles([$request->input('role')]);
+
+        // Enregistrez les modifications dans la base de données
+        $user->save();
+
+        // Redirigez l'utilisateur ou affichez un message de succès
+        return redirect()->back()->with('success', 'User updated successfully!');
     }
 }

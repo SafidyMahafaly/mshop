@@ -9,10 +9,12 @@ use Laratrust\Contracts\LaratrustUser;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\HasRolesAndPermissions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements LaratrustUser
 {
+    use SoftDeletes;
     use HasRolesAndPermissions;
     use HasApiTokens, HasFactory, Notifiable;
 

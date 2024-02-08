@@ -9,71 +9,88 @@
 ==========================================================================================*/
 $(function () {
   ('use strict');
+$('.edit').on('click',function(){
+    var id = $(this).attr('data-id');
+    var name = $(this).attr('data-name');
+    var email = $(this).attr('data-email');
+    var roleId = $(this).attr('data-role-id'); // Récupérer l'ID du rôle
+    $('#name_u').val(name)
+    $('#email_u').val(email)
+    $('#id_u').val(id)
 
+    // Parcourir les options du menu déroulant
+    $('#role_u option').each(function() {
+        // Comparer l'ID du rôle avec la valeur de l'attribut data-role-id de chaque option
+        if ($(this).attr('data-role-id') == roleId) {
+            // Définir cette option comme sélectionnée
+            $(this).prop('selected', true);
+        }
+    });
+})
   var dtUserTable = $('.user-utilisateur-table')
   // Users List datatable
   if (dtUserTable.length) {
     dtUserTable.DataTable({
-        ajax: {
-            url: '/getUtilisateur', // Remplacez par l'URL de votre endpoint Laravel
-            type: 'GET',
-            dataSrc: ''
-        },
-        columns: [
-            { data: 'id' },
-            { data: 'name' },
-            { data: 'email' },
-            {
-                data: 'roles',
-                render: function(data, type, full) {
-                    return data.map(role => role.name).join(', ');
-                }
-            },
-            { data: 'roles' },
-        ],
-        columnDefs: [
-            {
-                className: 'control',
-                orderable: false,
-                responsivePriority: 2,
-                targets: 0,
-                render: function (data, type, full, meta) {
-                    return '';
-                }
-            },
-            {
-                targets: [1, 2],
-                responsivePriority: 3,
-                render: function (data, type, full, meta) {
-                    console.log('teste');
-                    var columnName = dtUserTable.DataTable().settings().init().columns[meta.col].data;
-                    var columnData = full[columnName];
-                    return '<p>' + columnData + '</p>';
-                }
-            },
+        // ajax: {
+        //     url: '/getUtilisateur', // Remplacez par l'URL de votre endpoint Laravel
+        //     type: 'GET',
+        //     dataSrc: ''
+        // },
+        // columns: [
+        //     { data: 'id' },
+        //     { data: 'name' },
+        //     { data: 'email' },
+        //     {
+        //         data: 'roles',
+        //         render: function(data, type, full) {
+        //             return data.map(role => role.name).join(', ');
+        //         }
+        //     },
+        //     { data: 'roles' },
+        // ],
+        // columnDefs: [
+        //     {
+        //         className: 'control',
+        //         orderable: false,
+        //         responsivePriority: 2,
+        //         targets: 0,
+        //         render: function (data, type, full, meta) {
+        //             return '';
+        //         }
+        //     },
+        //     {
+        //         targets: [1, 2],
+        //         responsivePriority: 3,
+        //         render: function (data, type, full, meta) {
+        //             console.log('teste');
+        //             var columnName = dtUserTable.DataTable().settings().init().columns[meta.col].data;
+        //             var columnData = full[columnName];
+        //             return '<p>' + columnData + '</p>';
+        //         }
+        //     },
 
-            {
-                targets: 4,
-                title: 'Actions',
-                orderable: false,
-                render: function (data, type, full) {
-                    var commandeView = '/profil/' + full.id; // Utilisez directement full.id
-                    var userView = '/profile/' + full.id; // Utilisez directement full.id
-                    var userDelete = '/deleteF/' + full.id; // Utilisez directement full.id
-                    return (
-                        '<div class="btn-group">' +
-                        '<a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">' +
-                        feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
-                        '</a>' +
-                        '<div class="dropdown-menu dropdown-menu-end">' +
-                        '<a href="' + userView + '" class="dropdown-item">' +
-                        feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
-                        'Operation</a>' +
-                        '</div>'
-                    );
-                }
-            }
-        ],
+        //     {
+        //         targets: 4,
+        //         title: 'Actions',
+        //         orderable: false,
+        //         render: function (data, type, full) {
+        //             var commandeView = '/profil/' + full.id; // Utilisez directement full.id
+        //             var userView = '/profile/' + full.id; // Utilisez directement full.id
+        //             var userDelete = '/deleteF/' + full.id; // Utilisez directement full.id
+        //             return (
+        //                 '<div class="btn-group">' +
+        //                 '<a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">' +
+        //                 feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
+        //                 '</a>' +
+        //                 '<div class="dropdown-menu dropdown-menu-end">' +
+        //                 '<a href="' + userView + '" class="dropdown-item">' +
+        //                 feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) +
+        //                 'Operation</a>' +
+        //                 '</div>'
+        //             );
+        //         }
+        //     }
+        // ],
         order: [[1, 'desc']],
         dom:
             '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"' +
@@ -207,6 +224,8 @@ $(function () {
         }
     });
 }
+
+
 
   // Form Validation
 
