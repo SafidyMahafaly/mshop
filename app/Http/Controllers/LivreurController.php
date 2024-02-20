@@ -37,7 +37,8 @@ class LivreurController extends Controller
         $livreur = Livreur::findOrFail($id);
         if ($livreur) {
             $query = Livreur_commande::with('commande.details', 'commande.client', 'commande.user', 'commande.details.produit', 'commande.details.produit.categorie')
-                ->where('livreur_id', $id);
+                    ->orderBy('id', 'desc')
+                    ->where('livreur_id', $id);
 
 
             // Si une date est fournie, filtrer par cette date
@@ -150,7 +151,7 @@ class LivreurController extends Controller
          $dompdf = new Dompdf($options);
 
          // Récupérer les données nécessaires pour générer le PDF
-         $commandes = Livreur_commande::with('commande.details', 'commande.client', 'commande.user', 'commande.details.produit', 'commande.details.produit.categorie')
+        $commandes = Livreur_commande::with('commande.details', 'commande.client', 'commande.user', 'commande.details.produit', 'commande.details.produit.categorie')
              ->where('livreur_id', $request->livreur_id)
              ->whereIn('commande_id', $commandes)
              ->get();

@@ -9,10 +9,10 @@
                         <input type="hidden" value="{{$livreur->name}}" id="name_liv">
                         <input type="hidden" value="{{count($commandes)}}" id="compteur">
                     </div>
-                    <div class="col-md-2 p-2">
-                        <label class="form-label" for="basic-icon-default-fullname">Filtre par date :</label>
+                    <div class="col-md-3 p-2 d-flex">
                         <input type="hidden" id="livreur_id" value="{{$livreur->id}}" >
-                        <input type="date" class="form-control" id="filter_date" name="filter_date" value="{{ $date ? $date->format('Y-m-d') : '' }}">
+                        <button class="btn btn-primary">{{count($commandes)}}</button>
+                        <input type="date" style="margin-left: 20px" class="form-control" id="filter_date" name="filter_date" value="{{ $date ? $date->format('Y-m-d') : '' }}">
                     </div>
                     <div class="card-datatable table-responsive pt-0 p-1">
                         <table class="user-cmd-table table">
@@ -26,7 +26,6 @@
                                     <th>Téléphone</th>
                                     <th>Produit</th>
                                     <th style="display: none">Produit</th>
-                                    <th>Quantité</th>
                                     <th>Total</th>
                                     <th>Statut</th>
                                     <th>Cree par</th>
@@ -53,13 +52,12 @@
 
                                             @foreach ($com->commande->details as $det)
                                                 @php
-                                                    $produitNames[] = $det->produit->name;
+                                                    $produitNames[] = $det->produit->name . '(' . $det->quantity . ')';
                                                 @endphp
                                             @endforeach
 
-                                            {{ implode(' + ', $produitNames) }}
+                                            {{ implode(' + ', $produitNames ) }}
                                         </td>
-                                        <td>1</td>
                                         <td>
                                             @if($com->commande->payer == 1)
                                                 - Payer

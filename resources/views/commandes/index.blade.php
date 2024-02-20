@@ -12,8 +12,9 @@
                 <div class="card">
                     <div class="card-body border-bottom">
                         <h4 class="card-title">Liste commande & Filter</h4>
-                        <div class="col-2">
-                            <input type="date" class="form-control" value="{{$aujourdhui}}" id="teste_ma">
+                        <div class="col-3 d-flex" >
+                            <button class="btn btn-primary">{{count($commandes)}}</button>
+                            <input type="date" style="margin-left: 20px" class="form-control" value="{{$aujourdhui}}" id="teste_ma">
                         </div>
                     </div>
                     <div class="card-datatable table-responsive pt-0">

@@ -423,7 +423,7 @@ function getSelectedIds() {
     if(livreur == 'null'){
         alert('veuillez selectioner un livreur')
     }else{
-        alert(selectedIds)
+        // alert(selectedIds)
         $.ajax({
             type: "GET",
             url: "/livreur_commande",

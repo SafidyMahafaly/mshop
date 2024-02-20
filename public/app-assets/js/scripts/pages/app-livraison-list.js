@@ -182,6 +182,7 @@ if (dtUserTable.length) {
                 next: '&nbsp;'
             }
         },
+        ordering: false,
         buttons: [
             {
                 extend: 'collection',
@@ -193,7 +194,7 @@ if (dtUserTable.length) {
                         text: feather.icons['file'].toSvg({ class: 'font-small-4 me-50' }) + 'Excel',
                         className: 'dropdown-item',
                         title: ' Liste livraisons - Date : ' + date + ' - Livreur : ' + livreur + ' - Nbr : ' + compteur,
-                        exportOptions: { columns: [1,2,5,6,7] }
+                        exportOptions: { columns: [1,2,3,5,6] }
                     },
 
                 ],
