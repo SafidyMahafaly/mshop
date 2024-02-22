@@ -89,7 +89,10 @@ class LivreurController extends Controller
     {
         $commande = Commande::whereIn('id',$request->id)->get();
         foreach($commande as $com){
-            Livreur_commande::where('commande_id',$com->id)->update(['livreur_id' => $request->livreur]);
+            Livreur_commande::where('commande_id',$com->id)->update([
+                'livreur_id' => $request->livreur,
+                'created_at' => $com->created_at,
+            ]);
         }
         return response()->json();
     }
