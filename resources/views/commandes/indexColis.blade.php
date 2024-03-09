@@ -13,7 +13,7 @@
                     <div class="card-body border-bottom">
                         <h4 class="card-title">Liste Colis</h4>
                         <div class="col-2">
-                            <input type="date" class="form-control" value="{{$aujourdhui}}" id="teste_ma">
+                            <input type="date" class="form-control" value="{{$aujourdhui->format('Y-m-d')}}" id="teste_ma">
                         </div>
                     </div>
                     <div class="card-datatable table-responsive pt-0">

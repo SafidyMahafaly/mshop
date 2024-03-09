@@ -12,9 +12,17 @@
                 <div class="card">
                     <div class="card-body border-bottom">
                         <h4 class="card-title">Liste commande & Filter</h4>
-                        <div class="col-3 d-flex" >
+                        <div class="col-5 d-flex" >
                             <button class="btn btn-primary">{{count($commandes)}}</button>
-                            <input type="date" style="margin-left: 20px" class="form-control" value="{{$aujourdhui}}" id="teste_ma">
+                            <input type="date" style="margin-left: 20px" class="form-control" value="{{$aujourdhui->format('Y-m-d')}}" id="teste_ma">
+                            <select name="statusFilter" id="statusFilter" class="form-control" style="margin-left: 20px;">
+                                <option value="">Tout</option>
+                                <option value="en attente">En attente</option>
+                                <option value="Assigner">Assigner</option>
+                                <option value="Livré">Livré</option>
+                                <option value="Annuler">Annuler</option>
+                                <option value="Reporter">Reporter</option>
+                            </select>
                         </div>
                     </div>
                     <div class="card-datatable table-responsive pt-0">

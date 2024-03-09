@@ -142,6 +142,10 @@
                                         <option value="1">Oui</option>
                                     </select>
                                 </div>
+                                <div class="col-md-4 mb-1">
+                                    <label class="form-label"  for="basic-icon-default-fullname">Remarque</label>
+                                    <input type="text" name="note" class="form-control">
+                                </div>
                             </div>
                             <hr>
                             <div class="row " id="livrer">
@@ -157,7 +161,7 @@
                                     </div>
                                     <div class="col-md-3 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">date</label>
-                                        <input type="date" value="{{ $aujourdhui }}" class="form-control dt-full-name"  id="basic-icon-default-fullname"  name="date_livraison" />
+                                        <input type="date" value="{{ $aujourdhui->format('Y-m-d') }}" class="form-control dt-full-name"  id="basic-icon-default-fullname"  name="date_livraison" />
                                     </div>
                                     <div class="col-md-3 mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">Heure</label>

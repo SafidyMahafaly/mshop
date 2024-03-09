@@ -45,8 +45,15 @@ class LivreurController extends Controller
             if ($date) {
                 $query->whereDate('created_at', $date);
             } else {
-                // Sinon, filtrer par la date d'aujourd'hui
-                $query->whereDate('created_at', Carbon::tomorrow());
+                // Sinon, filtrer par la date d'aujourd'
+                $aujourdhui = Carbon::tomorrow();
+
+                // Vérifier si demain est un dimanche
+                if ($aujourdhui->isSunday()) {
+                    // Si demain est dimanche, ajoutez deux jours pour obtenir la date de lundi
+                    $aujourdhui->addDays(1);
+                }
+                $query->whereDate('created_at', $aujourdhui);
             }
             $commandes = $query->get();
             $commandeIds = [];
@@ -65,6 +72,11 @@ class LivreurController extends Controller
                 $date = is_string($date) ? \Carbon\Carbon::parse($date) : $date;
             }else{
                 $date = Carbon::tomorrow();
+                // Vérifier si demain est un dimanche
+                if ($date->isSunday()) {
+                    // Si demain est dimanche, ajoutez deux jours pour obtenir la date de lundi
+                    $date->addDays(1);
+                }
             }
             $livreurs = Livreur::all();
             return view('livreur.list_cmd', compact('commandes', 'livreur','date','id','livreurs','sommeCommandesStatut3'));
@@ -157,7 +169,10 @@ class LivreurController extends Controller
         $commandes = Livreur_commande::with('commande.details', 'commande.client', 'commande.user', 'commande.details.produit', 'commande.details.produit.categorie')
              ->where('livreur_id', $request->livreur_id)
              ->whereIn('commande_id', $commandes)
-             ->get();
+             ->get()
+             ->sortBy(function($livreur_commande) {
+                return $livreur_commande->commande->details->count();
+            });
         $livreur = Livreur::find($request->livreur_id);
 
          // Charger la vue PDF avec les données récupérées

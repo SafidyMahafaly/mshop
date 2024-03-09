@@ -9,6 +9,22 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+body {
+    font-size: 14px; /* Remplacez 16px par la taille de texte souhaitée */
+    color: black !important;
+}
+body td{
+    font-size: 14px;
+    color: black !important;
+    font-weight: bold;
+}
+body label{
+    font-size: 14px !important;
+    color: black !important;
+    font-weight: bold;
+}
+
 .suggestion-item, .suggestion-item-client{
     cursor: pointer;
     padding: 13px;

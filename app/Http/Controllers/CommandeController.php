@@ -29,9 +29,16 @@ class CommandeController extends Controller
     public function index($date = null)
     {
         if($date){
-            $aujourdhui = $date;
+            $aujourdhui = is_string($date) ? \Carbon\Carbon::parse($date) : $date;
         }else{
-            $aujourdhui = Carbon::tomorrow()->toDateString();
+            // $aujourdhui = Carbon::tomorrow()->toDateString();
+            $aujourdhui = Carbon::tomorrow();
+
+        // Vérifier si demain est un dimanche
+            if ($aujourdhui->isSunday()) {
+                // Si demain est dimanche, ajoutez deux jours pour obtenir la date de lundi
+                $aujourdhui->addDays(1);
+            }
         }
         $livreurs = Livreur::all();
         $commandes = Commande::orderBy('id', 'desc')->whereDate('created_at',$aujourdhui)->with('client','user','details','livreur')->get();
@@ -41,9 +48,16 @@ class CommandeController extends Controller
     public function colis($date = null)
     {
         if($date){
-            $aujourdhui = $date;
+            $aujourdhui = is_string($date) ? \Carbon\Carbon::parse($date) : $date;
         }else{
-            $aujourdhui = Carbon::tomorrow()->toDateString();
+            // $aujourdhui = Carbon::tomorrow()->toDateString();
+            $aujourdhui = Carbon::tomorrow();
+
+        // Vérifier si demain est un dimanche
+            if ($aujourdhui->isSunday()) {
+                // Si demain est dimanche, ajoutez deux jours pour obtenir la date de lundi
+                $aujourdhui->addDays(1);
+            }
         }
         $livreurs = Livreur::all();
         $commandes = Commande::orderBy('id', 'desc')->where('colis',1)->whereDate('created_at',$aujourdhui)->with('client','user','details','livreur')->get();
@@ -90,7 +104,13 @@ class CommandeController extends Controller
      */
     public function create()
     {
-        $aujourdhui = Carbon::tomorrow()->toDateString();
+        $aujourdhui = Carbon::tomorrow();
+
+        // Vérifier si demain est un dimanche
+        if ($aujourdhui->isSunday()) {
+            // Si demain est dimanche, ajoutez deux jours pour obtenir la date de lundi
+            $aujourdhui->addDays(1);
+        }
         return view('commandes.create',compact('aujourdhui'));
     }
 
@@ -207,7 +227,8 @@ class CommandeController extends Controller
                 'payer'           => $request->paye,
                 'created_at'      => $date,
                 'colis'           => $request->colis,
-                'mode_payement'   => $request->modeP
+                'mode_payement'   => $request->modeP,
+                'remarque'        => $request->note
             ]);
             $produit = $request->id_produit;
             $quatite = $request->quantite;

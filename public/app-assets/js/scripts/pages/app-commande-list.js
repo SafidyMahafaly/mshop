@@ -311,9 +311,11 @@ $(function () {
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
+                        // Créer et ajouter la select
+                        var selectHTML = '<select id="filterSelect"><option value="">Filter</option><option value="value1">Value 1</option><option value="value2">Value 2</option></select>';
+                        $(node).after(selectHTML);
                     }
                 },
-
             ],
             responsive: {
                 details: {
@@ -362,7 +364,11 @@ $(function () {
     }
 
 
-
+$('#statusFilter').change(function() {
+    var selectedStatus = $(this).val();
+    // Recharger la DataTable avec le nouveau filtre
+    dtUserTable.DataTable().column(6).search(selectedStatus).draw();
+});
 
 $('#adress').on('input',function(){
     $('#lieu_livraison').val($(this).val());

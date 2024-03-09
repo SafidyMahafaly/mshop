@@ -73,6 +73,7 @@
                 {{ $produits }}
                 <br>
                 <i><u>Prix avec livraison</u> : </i>{{ $commande->commande->total }} Ar<br>
+                <i><u>Remarque  </u> : {{$commande->commande->remarque}}</i><br>
                 <i><u>Livreur</u> : </i>{{ $livreur->name }}<br>
                 {{-- <i><u>Remarque</u> : </i>{{ $commande->commande->remarque }} <br> --}}
 
