@@ -39,7 +39,7 @@
 ?>
 <body style=" margin-top: -2.6rem; margin-left: -2.5rem; margin-right: -2rem">
     @foreach ($commandes  as $index => $commande)
-        @if($index > 0 && $index % 10 == 0)
+        @if($index > 0 && $index % 8 == 0)
             <!-- Ajouter une nouvelle page après chaque groupe de 8 éléments -->
             <div style="page-break-before: always;"></div>
         @endif
