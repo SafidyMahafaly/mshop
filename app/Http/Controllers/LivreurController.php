@@ -169,10 +169,10 @@ class LivreurController extends Controller
         $commandes = Livreur_commande::with('commande.details', 'commande.client', 'commande.user', 'commande.details.produit', 'commande.details.produit.categorie')
              ->where('livreur_id', $request->livreur_id)
              ->whereIn('commande_id', $commandes)
-             ->get()
-             ->sortBy(function($livreur_commande) {
-                return $livreur_commande->commande->details->count();
-            });
+             ->get();
+            //  ->sortBy(function($livreur_commande) {
+            //     return $livreur_commande->commande->details->count();
+            // });
         $livreur = Livreur::find($request->livreur_id);
 
          // Charger la vue PDF avec les données récupérées
