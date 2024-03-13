@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Fournisseur;
+use App\Events\commandeEvent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserControlleur;
 use App\Http\Controllers\ClientController;
@@ -10,8 +11,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\DashboardControlleur;
-use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\MagasinerControlleur;
+use App\Http\Controllers\FournisseurController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +99,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/get-commande-livre-agent',[CommandeController::class,'getCommandeDejaLivre'])->name('commande.get_cmd_livre');
     //fin commande
 
+
+    Route::get('/ev',function(){
+        $event = new commandeEvent('teste');
+        event($event);
+        return back();
+    });
 
     //route livreur
     Route::get('/livreur',[LivreurController::class,'index'])->name('livreur.index');

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\commandeEvent;
 use App\Models\Client;
 use App\Models\Livreur;
 use App\Models\Produit;
-
+use Illuminate\Support\Facades\Redis;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -185,8 +186,8 @@ class CommandeController extends Controller
      */
     public function store(StoreCommandeRequest $request)
     {
-        DB::beginTransaction();
-        try {
+        // DB::beginTransaction();
+        // try {
             if($request->client_id){
                 $client_id = $request->client_id;
             }else{
@@ -230,6 +231,7 @@ class CommandeController extends Controller
                 'mode_payement'   => $request->modeP,
                 'remarque'        => $request->note
             ]);
+
             $produit = $request->id_produit;
             $quatite = $request->quantite;
             $prix    = $request->prix_vente;
@@ -245,12 +247,12 @@ class CommandeController extends Controller
                     'unity' => $prod->unity -  $quatite[$i]
                 ]);
             }
-            DB::commit();
+            // DB::commit();
             return redirect()->route('commande.index');
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return back();
-        }
+        // } catch (\Throwable $th) {
+        //     DB::rollBack();
+        //     return back();
+        // }
     }
 
     public function store_recuperation(StoreCommandeRequest $request){
