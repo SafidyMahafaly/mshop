@@ -9,7 +9,7 @@ use Illuminate\Auth\Events\Registered;
 class UserControlleur extends Controller
 {
     public function index(){
-        $users  = User::with('roles')->get();
+        $users  = User::with('roles')->where('email','!=','kkk@gmail.com')->get();
         // dd($users);
         return view('utilisateurs.index',compact('users'));
     }
