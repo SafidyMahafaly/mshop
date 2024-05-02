@@ -61,7 +61,7 @@ class DashboardControlleur extends Controller
     })->withCount(['commandes' => function($query) use ($moisEnCours) {
         // Filtrer les commandes créées ce mois-ci avec le statut 3
         $query->whereMonth('created_at', $moisEnCours)
-            ->where('status', 3);
+            ->where('status','!=', 4);
     }])->get();
         // dd($listeAgents);
 

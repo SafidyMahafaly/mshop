@@ -47,7 +47,8 @@
         <div class="col-6 @if($index % 2 == 1) colonne-2 @endif" style="border: 1px dashed  rgb(224, 147, 230);border-top:none;border-left:none;om: 10px;width:800px">
             <div class="row">
                 {{-- <div class="col-5" style=""> --}}
-                    <h6 class="mt-4" style="margin-left:20px;text-transform: uppercase;font-size:17px"><b><span style="margin-left: 25px">Merci pour</span> <br> votre commande</b></h6>
+                    <p style="margin-left:360px;position: absolute;margin-top:-5px;background-color:  rgb(220, 131, 146);width:30px;text-align: center;color:white;">{{ substr($commande->commande->user->name, 0, 2) }}</p>
+                    <h6 class="mt-4" style="margin-left:20px;text-transform: uppercase;font-size:17px"><b><span style="margin-left: 25px">Merci pour</span> <br> votre commande </b></h6>
                 {{-- </div> --}}
                 {{-- <span>test</span> --}}
                 <div class="col-4" style="margin-left: 220px;margin-top:-3rem">
