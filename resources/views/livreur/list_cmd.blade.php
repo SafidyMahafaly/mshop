@@ -60,7 +60,7 @@
                                         </td>
                                         <td>
                                             @if($com->commande->payer == 1)
-                                                - Payer
+                                                - Payer ({{$com->commande->total}} Ar)
                                             @else
                                                 - {{$com->commande->total}} Ar
                                             @endif

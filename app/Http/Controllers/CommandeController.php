@@ -42,7 +42,12 @@ class CommandeController extends Controller
             }
         }
         $livreurs = Livreur::all();
-        $commandes = Commande::orderBy('id', 'desc')->whereDate('created_at',$aujourdhui)->with('client','user','details','livreur')->get();
+        $commandes = Commande::orderBy('id', 'desc')
+        ->whereDate('created_at', $aujourdhui)
+        ->with(['client', 'user' => function ($query) {
+            $query->withTrashed(); // inclure les utilisateurs supprimés
+        }, 'details', 'livreur'])
+        ->get();
         // dd($commandes);
         return view('commandes.index',compact('livreurs','commandes','aujourdhui'));
     }
